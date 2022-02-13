@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { google } from "googleapis";
+import googleSheetsAuth from "../helpers/googleSheetsAuth";
 
 export default function Home(props) {
   function numDifferentiation(val) {
@@ -16,10 +16,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const auth = await google.auth.getClient({
-    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-  });
-  const sheets = google.sheets({ version: "v4", auth });
+  const sheets = await googleSheetsAuth();
 
   // Brand id from the url
   const range = "investments!B2:B95";
