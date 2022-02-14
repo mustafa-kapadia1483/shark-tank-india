@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Setting up .env.local:
+
+```
+GOOGLE_APPLICATION_CREDENTIALS=./secrets.json
+SHEET_ID=1OSSh4hn3o9xUs9HqRWSybyK9IvFyA6wvS_PYMsccihA
+```
+
 First, run the development server:
 
 ```bash
