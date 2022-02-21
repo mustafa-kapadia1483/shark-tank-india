@@ -1,15 +1,16 @@
+import getJsonArrayFromData from "../../../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../../../helpers/googleSheetsAuth";
 import queryGoogleSheet from "../../../helpers/queryGoogleSheet";
 
 const handler = async (req, res) => {
   const sheets = await googleSheetsAuth();
 
-  // Brand id from the url
-  const response = await queryGoogleSheet(sheets, "brands!A2:C118");
+  const response = await queryGoogleSheet(sheets, "brands!A1:C118");
   const data = response.data.values;
+  const jsonData = getJsonArrayFromData(data);
 
-  if (data) {
-    res.status(200).json({ brands: data });
+  if (jsonData) {
+    res.status(200).json({ brands: jsonData });
   }
 };
 
