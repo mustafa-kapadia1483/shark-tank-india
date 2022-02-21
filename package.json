@@ -8,6 +8,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.5",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "framer-motion": "^6.2.7",
     "googleapis": "^95.0.0",
     "next": "12.0.10",
     "react": "17.0.2",
