@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Fragment } from "react";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
@@ -16,6 +17,9 @@ export default function Home({
   }
   return (
     <Fragment>
+      <Head>
+        <title>Shark Tank India Stats</title>
+      </Head>
       <p>Money Spent On Equity: {numDifferentiation(moneyGivenForEquity)}</p>
       <p>Money Spent As Debt: {numDifferentiation(moneyGivenAsDebt)}</p>
       <p>Total Pitches/Brands: {totalPitches}</p>
