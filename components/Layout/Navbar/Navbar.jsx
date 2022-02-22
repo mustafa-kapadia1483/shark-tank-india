@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Link from "next/link";
+import SiteLogo from "../../ui/SiteLogo";
 
 const Links = [
   { name: "Home", href: "/" },
@@ -21,12 +22,12 @@ const NavLink = ({ children, href }) => (
   <Box
     px={2}
     py={1}
+    color="blue.100"
     rounded={"md"}
     _hover={{
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
   >
     <Link href={href}>{children}</Link>
   </Box>
@@ -37,23 +38,16 @@ export default function Simple() {
 
   return (
     <>
-      <Box>
+      <Box position="fixed" top="0" left="0" right="0" bg="gray.800">
         <Container maxWidth={{ base: "full", lg: "container.xl" }}>
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-            <IconButton
-              size={"md"}
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label={"Open Menu"}
-              display={{ md: "none" }}
-              onClick={isOpen ? onClose : onOpen}
-            />
             <HStack
               spacing={8}
               w="full"
               alignItems={"center"}
-              justifyContent={{ base: "flex-end", md: "space-between" }}
+              justifyContent={{ base: "flex-start", md: "space-between" }}
             >
-              <Box>STI</Box>
+              <SiteLogo />
               <HStack
                 as={"nav"}
                 spacing={4}
@@ -66,6 +60,13 @@ export default function Simple() {
                 ))}
               </HStack>
             </HStack>
+            <IconButton
+              size={"md"}
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              aria-label={"Open Menu"}
+              display={{ md: "none" }}
+              onClick={isOpen ? onClose : onOpen}
+            />
           </Flex>
 
           {isOpen ? (

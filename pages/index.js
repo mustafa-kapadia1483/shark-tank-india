@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Fragment } from "react";
+import Hero from "../components/ui/Hero";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
 import queryGoogleSheet from "../helpers/queryGoogleSheet";
@@ -20,6 +21,11 @@ export default function Home({
       <Head>
         <title>Shark Tank India Stats</title>
       </Head>
+      <Hero
+        moneyOnEquity={numDifferentiation(moneyGivenForEquity)}
+        moneyAsDebt={numDifferentiation(moneyGivenAsDebt)}
+        totalBrands={totalPitches}
+      />
       <p>Money Spent On Equity: {numDifferentiation(moneyGivenForEquity)}</p>
       <p>Money Spent As Debt: {numDifferentiation(moneyGivenAsDebt)}</p>
       <p>Total Pitches/Brands: {totalPitches}</p>
