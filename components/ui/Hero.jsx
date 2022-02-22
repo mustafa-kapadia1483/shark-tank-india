@@ -1,22 +1,17 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import H1 from "./H1";
 
 const Hero = ({ moneyOnEquity, moneyAsDebt, totalBrands }) => {
   return (
     <Box as="section">
-      <Heading
-        as="h1"
-        fontSize="5xl"
-        textTransform="capitalize"
-        fontWeight="extrabold"
-        textAlign="center"
-      >
+      <H1>
         <Text display="inline-block" color="blue.400">
           shark tank
         </Text>
         <Text ml="2" display="inline-block" color="yellow.400">
           india stats
         </Text>
-      </Heading>
+      </H1>
     </Box>
   );
 };
