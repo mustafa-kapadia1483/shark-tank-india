@@ -8,7 +8,7 @@ const Hero = ({ moneyOnEquity, moneyAsDebt, totalBrands }) => {
         <Text display="inline-block" color="blue.400">
           shark tank
         </Text>
-        <Text ml="2" display="inline-block" color="yellow.400">
+        <Text ml="2" display="inline-block" color="yellow.300">
           india stats
         </Text>
       </H1>

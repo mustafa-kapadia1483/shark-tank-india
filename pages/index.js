@@ -1,4 +1,7 @@
+import { Box, Flex } from "@chakra-ui/react";
 import Head from "next/head";
+import Image from "next/image";
+import AmountBadges from "../components/ui/AmountBadges";
 import Hero from "../components/ui/Hero";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
@@ -20,9 +23,37 @@ export default function Home({
         moneyAsDebt={numFormatter(moneyGivenAsDebt)}
         totalBrands={totalPitches}
       />
-      <p>Money Spent On Equity: {numFormatter(moneyGivenForEquity)}</p>
-      <p>Money Spent As Debt: {numFormatter(moneyGivenAsDebt)}</p>
-      <p>Total Pitches/Brands: {totalPitches}</p>
+      <Flex
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        gap="10"
+        marginTop="5"
+      >
+        <AmountBadges
+          amount={numFormatter(moneyGivenForEquity, true) + "+"}
+          title="Spent On Equity"
+        />
+        <AmountBadges
+          amount={numFormatter(moneyGivenAsDebt, true) + "+"}
+          title="Spent As Debt"
+        />
+        <AmountBadges amount={totalPitches} title="Brands" />
+      </Flex>
+      <Flex
+        marginTop="10"
+        maxWidth="full"
+        justifyContent={["none", "center"]}
+        position="relative"
+      >
+        <Image
+          src="/sharktankindia-banner.png"
+          width="694"
+          height="440"
+          alt="Banner Image"
+          objectFit="fill"
+        />
+      </Flex>
     </>
   );
 }
@@ -30,7 +61,6 @@ export default function Home({
 export async function getStaticProps() {
   const sheets = await googleSheetsAuth();
 
-  // Brand id from the url
   const range = "investments!B2:B95";
   const response = await queryGoogleSheet(sheets, "investments_cleaned!A1:L95");
   const data = response.data.values;

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import Navbar from "./Navbar/Navbar";
 
 const Layout = ({ children }) => (
@@ -7,7 +7,9 @@ const Layout = ({ children }) => (
       <Navbar />
     </header>
     <main>
-      <Box marginTop="20">{children}</Box>
+      <Container marginTop="20" maxWidth={{ base: "95%", lg: "container.xl" }}>
+        {children}
+      </Container>
     </main>
     <footer></footer>
   </>
