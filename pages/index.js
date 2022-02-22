@@ -2,6 +2,7 @@ import Head from "next/head";
 import Hero from "../components/ui/Hero";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
+import numFormatter from "../helpers/numberFormatter";
 import queryGoogleSheet from "../helpers/queryGoogleSheet";
 
 export default function Home({
@@ -9,24 +10,18 @@ export default function Home({
   moneyGivenForEquity,
   totalPitches,
 }) {
-  function numDifferentiation(val) {
-    if (val >= 10000000) val = (val / 10000000).toFixed(2) + " Cr";
-    else if (val >= 100000) val = (val / 100000).toFixed(2) + " Lac";
-    else if (val >= 1000) val = (val / 1000).toFixed(2) + " K";
-    return val;
-  }
   return (
     <>
       <Head>
         <title>Shark Tank India Stats</title>
       </Head>
       <Hero
-        moneyOnEquity={numDifferentiation(moneyGivenForEquity)}
-        moneyAsDebt={numDifferentiation(moneyGivenAsDebt)}
+        moneyOnEquity={numFormatter(moneyGivenForEquity)}
+        moneyAsDebt={numFormatter(moneyGivenAsDebt)}
         totalBrands={totalPitches}
       />
-      <p>Money Spent On Equity: {numDifferentiation(moneyGivenForEquity)}</p>
-      <p>Money Spent As Debt: {numDifferentiation(moneyGivenAsDebt)}</p>
+      <p>Money Spent On Equity: {numFormatter(moneyGivenForEquity)}</p>
+      <p>Money Spent As Debt: {numFormatter(moneyGivenAsDebt)}</p>
       <p>Total Pitches/Brands: {totalPitches}</p>
     </>
   );
