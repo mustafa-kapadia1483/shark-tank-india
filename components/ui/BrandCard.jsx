@@ -7,10 +7,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const BrandCard = ({ brand, dealDone }) => {
-  console.log(dealDone);
+const BrandCard = ({ key, brand, dealDone }) => {
   return (
-    <Center as="li" py={6} width={{ base: "100%", lg: "350px" }}>
+    <Center key={key} as="li" py={6} width={{ base: "100%", lg: "350px" }}>
       <Box
         maxW={"445px"}
         w={"full"}
