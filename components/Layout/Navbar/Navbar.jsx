@@ -38,7 +38,14 @@ export default function Simple() {
 
   return (
     <>
-      <Box position="fixed" top="0" left="0" right="0" bg="gray.800">
+      <Box
+        position="fixed"
+        top="0"
+        left="0"
+        right="0"
+        bg="gray.800"
+        zIndex="999"
+      >
         <Container maxWidth={{ base: "95%", lg: "container.xl" }}>
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
             <HStack

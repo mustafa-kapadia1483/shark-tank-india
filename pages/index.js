@@ -2,6 +2,8 @@ import { Box, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
 import AmountBadges from "../components/ui/AmountBadges";
+import BrandList from "../components/ui/BrandList";
+import H2 from "../components/ui/H2";
 import Hero from "../components/ui/Hero";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
@@ -9,8 +11,10 @@ import numFormatter from "../helpers/numberFormatter";
 import queryGoogleSheet from "../helpers/queryGoogleSheet";
 
 export default function Home({
-  moneyGivenAsDebt,
+  investments,
+  brands,
   moneyGivenForEquity,
+  moneyGivenAsDebt,
   totalPitches,
 }) {
   return (
@@ -54,6 +58,12 @@ export default function Home({
           objectFit="fill"
         />
       </Flex>
+      <Box mt="16">
+        <H2 color="yellow.300">Brands</H2>
+        <Box mt="5" id="brands">
+          <BrandList investments={investments} brands={brands} />
+        </Box>
+      </Box>
     </>
   );
 }
@@ -61,22 +71,28 @@ export default function Home({
 export async function getStaticProps() {
   const sheets = await googleSheetsAuth();
 
-  const range = "investments!B2:B95";
-  const response = await queryGoogleSheet(sheets, "investments_cleaned!A1:L95");
-  const data = response.data.values;
-  const jsonData = getJsonArrayFromData(data);
+  let response = await queryGoogleSheet(sheets, "investments_cleaned!A1:L95");
+  let data = response.data.values;
+  const investments = getJsonArrayFromData(data);
 
-  const totalPitches = jsonData.length;
+  response = await queryGoogleSheet(sheets, "brands!A1:C118");
+  data = response.data.values;
+  const brands = getJsonArrayFromData(data);
+
+  const totalPitches = brands.length;
+
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  jsonData.forEach(investment => {
+  investments.forEach(investment => {
     moneyGivenForEquity += parseInt(investment.invested_amount);
     moneyGivenAsDebt += parseInt(investment.debt);
   });
 
   return {
     props: {
+      investments,
+      brands,
       moneyGivenForEquity,
       moneyGivenAsDebt,
       totalPitches,
