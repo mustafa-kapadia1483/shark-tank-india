@@ -71,13 +71,16 @@ export default function Home({
 export async function getStaticProps() {
   const sheets = await googleSheetsAuth();
 
-  let response = await queryGoogleSheet(sheets, "investments_cleaned!A1:L95");
-  let data = response.data.values;
-  const investments = getJsonArrayFromData(data);
+  const investmentsResponse = await queryGoogleSheet(
+    sheets,
+    "investments_cleaned!A1:L95"
+  );
+  const investmentsData = investmentsResponse.data.values;
+  const investments = getJsonArrayFromData(investmentsData);
 
-  response = await queryGoogleSheet(sheets, "brands!A1:C118");
-  data = response.data.values;
-  const brands = getJsonArrayFromData(data);
+  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:C118");
+  const brandsData = brandsResponse.data.values;
+  const brands = getJsonArrayFromData(brandsData);
 
   const totalPitches = brands.length;
 
