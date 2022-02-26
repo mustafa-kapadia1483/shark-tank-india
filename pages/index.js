@@ -51,9 +51,9 @@ export default function Home({
         position="relative"
       >
         <Image
-          src="/sharktankindia-banner.png"
+          src="/home_banner.jpg"
           width="694"
-          height="440"
+          height="400"
           alt="Banner Image"
           objectFit="fill"
         />
@@ -73,12 +73,12 @@ export async function getStaticProps() {
 
   const investmentsResponse = await queryGoogleSheet(
     sheets,
-    "investments_cleaned!A1:L95"
+    "investments!A1:P122"
   );
   const investmentsData = investmentsResponse.data.values;
   const investments = getJsonArrayFromData(investmentsData);
 
-  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:C118");
+  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:C122");
   const brandsData = brandsResponse.data.values;
   const brands = getJsonArrayFromData(brandsData);
 
@@ -87,11 +87,18 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach(investment => {
-    moneyGivenForEquity += parseInt(investment.invested_amount);
-    moneyGivenAsDebt += parseInt(investment.debt);
+  investments.forEach((investment) => {
+    //console.log(parseInt(investment.deal_amount));
+    moneyGivenForEquity += investment.deal_amount
+      ? parseInt(investment.deal_amount)
+      : 0;
+    moneyGivenAsDebt += investment.deal_debt
+      ? parseInt(investment.deal_debt)
+      : 0;
   });
 
+  moneyGivenAsDebt *= 100000;
+  moneyGivenForEquity *= 100000;
   return {
     props: {
       investments,

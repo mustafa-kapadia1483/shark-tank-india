@@ -7,9 +7,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const BrandCard = ({ key, brand, dealDone }) => {
+const BrandCard = ({ brand, investment }) => {
+  const { sharks_in_deal } = investment;
   return (
-    <Center key={key} as="li" py={6} width={{ base: "100%", lg: "350px" }}>
+    <Center as="li" py={6} width={{ base: "100%", lg: "350px" }}>
       <Box
         maxW={"445px"}
         w={"full"}
@@ -20,7 +21,7 @@ const BrandCard = ({ key, brand, dealDone }) => {
         overflow={"hidden"}
       >
         <Stack>
-          {dealDone === "TRUE" ? (
+          {parseInt(sharks_in_deal) ? (
             <Text
               color={"green.500"}
               textTransform={"uppercase"}
@@ -49,7 +50,7 @@ const BrandCard = ({ key, brand, dealDone }) => {
           >
             {brand.brand_name}
           </Heading>
-          <Text color={"gray.500"}>Idea: {brand.idea}</Text>
+          <Text color={"gray.500"}>{brand.idea}</Text>
         </Stack>
       </Box>
     </Center>

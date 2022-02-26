@@ -11,5 +11,5 @@ export default function numFormatter(val, floorFlag = false) {
     suffix = "K";
   }
   if (floorFlag) val = Math.floor(val);
-  return val + " " + suffix;
+  return val + "" + suffix;
 }
