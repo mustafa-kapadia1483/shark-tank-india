@@ -8,65 +8,57 @@ import {
   HStack,
   Avatar,
   VStack,
+  Badge,
 } from "@chakra-ui/react";
 import { CgUnavailable } from "react-icons/cg";
 
 const BrandCard = ({
-  brand: { brand_name, idea, website },
+  brand: { brand_name, idea, industry, website },
   investment: { sharks_in_deal },
 }) => {
   return (
-    <Center as="li" py={6} width={{ base: "100%", lg: "350px" }}>
-      <Box
-        maxW={"445px"}
-        w={"full"}
-        bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"2xl"}
-        rounded={"md"}
-        p={6}
-        overflow={"hidden"}
-        textAlign="center"
-      >
-        <Stack>
-          <VStack spacing="5">
-            <Avatar
-              size="2xl"
-              icon={<CgUnavailable />}
-              src={`https://logo.clearbit.com/${website}`}
-            />
-            <Heading
-              color={useColorModeValue("gray.700", "white")}
-              fontSize={"xl"}
-              fontFamily={"body"}
-            >
-              {brand_name}
-            </Heading>
-          </VStack>
+    <Box
+      as="li"
+      maxW={"445px"}
+      py={10}
+      px={6}
+      width={{ base: "100%", lg: "350px" }}
+      height={{ base: "auto", lg: "350px" }}
+      bg={useColorModeValue("white", "gray.900")}
+      borderWidth="thin"
+      borderColor={"gray.700"}
+      boxShadow={"2xl"}
+      rounded={"lg"}
+      overflow={"hidden"}
+      textAlign="center"
+    >
+      <Stack>
+        <VStack spacing="5">
+          <Avatar
+            size="2xl"
+            icon={<CgUnavailable />}
+            src={`https://logo.clearbit.com/${website}`}
+            loading="lazy"
+          />
+          <Heading
+            color={useColorModeValue("gray.700", "white")}
+            fontSize={"xl"}
+            fontFamily={"body"}
+          >
+            {brand_name}
+          </Heading>
+        </VStack>
+        <HStack justify="center" spacing="2">
+          <Badge>{industry}</Badge>
           {parseInt(sharks_in_deal) ? (
-            <Text
-              color={"green.500"}
-              textTransform={"uppercase"}
-              fontWeight={800}
-              fontSize={"sm"}
-              letterSpacing={1.1}
-            >
-              Got Deal
-            </Text>
+            <Badge colorScheme="green">Got Deal</Badge>
           ) : (
-            <Text
-              color={"red.300"}
-              textTransform={"uppercase"}
-              fontWeight={800}
-              fontSize={"sm"}
-              letterSpacing={1.1}
-            >
-              no deal
-            </Text>
+            <Badge colorScheme="red">No Deal</Badge>
           )}
-          <Text color={"gray.500"}>{idea}</Text>
-        </Stack>
-      </Box>
-    </Center>
+        </HStack>
+        <Text color={"gray.500"}>Idea: {idea}</Text>
+      </Stack>
+    </Box>
   );
 };
 

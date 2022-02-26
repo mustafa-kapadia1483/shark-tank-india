@@ -8,8 +8,9 @@ const BrandList = ({ investments, brands }) => {
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="center"
+      gap="10"
     >
-      {investments.map((investment) => (
+      {investments.map(investment => (
         <BrandCard
           key={investment.brand_id}
           investment={investment}
