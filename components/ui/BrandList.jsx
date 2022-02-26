@@ -5,6 +5,7 @@ const BrandList = ({ investments, brands }) => {
   return (
     <Flex
       as="ul"
+      marginTop={"10"}
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="center"

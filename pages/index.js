@@ -58,9 +58,9 @@ export default function Home({
           objectFit="fill"
         />
       </Flex>
-      <Box mt="16">
+      <Box mt="24">
         <H2 color="yellow.300">Brands</H2>
-        <Box mt="5" id="brands">
+        <Box marginTop="10" id="brands">
           <BrandList investments={investments} brands={brands} />
         </Box>
       </Box>
