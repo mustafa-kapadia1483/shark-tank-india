@@ -78,7 +78,7 @@ export async function getStaticProps() {
   const investmentsData = investmentsResponse.data.values;
   const investments = getJsonArrayFromData(investmentsData);
 
-  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:C122");
+  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:H122");
   const brandsData = brandsResponse.data.values;
   const brands = getJsonArrayFromData(brandsData);
 
@@ -87,7 +87,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach((investment) => {
+  investments.forEach(investment => {
     //console.log(parseInt(investment.deal_amount));
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)

@@ -5,10 +5,16 @@ import {
   Text,
   Stack,
   useColorModeValue,
+  HStack,
+  Avatar,
+  VStack,
 } from "@chakra-ui/react";
+import { CgUnavailable } from "react-icons/cg";
 
-const BrandCard = ({ brand, investment }) => {
-  const { sharks_in_deal } = investment;
+const BrandCard = ({
+  brand: { brand_name, idea, website },
+  investment: { sharks_in_deal },
+}) => {
   return (
     <Center as="li" py={6} width={{ base: "100%", lg: "350px" }}>
       <Box
@@ -19,8 +25,23 @@ const BrandCard = ({ brand, investment }) => {
         rounded={"md"}
         p={6}
         overflow={"hidden"}
+        textAlign="center"
       >
         <Stack>
+          <VStack spacing="5">
+            <Avatar
+              size="2xl"
+              icon={<CgUnavailable />}
+              src={`https://logo.clearbit.com/${website}`}
+            />
+            <Heading
+              color={useColorModeValue("gray.700", "white")}
+              fontSize={"xl"}
+              fontFamily={"body"}
+            >
+              {brand_name}
+            </Heading>
+          </VStack>
           {parseInt(sharks_in_deal) ? (
             <Text
               color={"green.500"}
@@ -42,15 +63,7 @@ const BrandCard = ({ brand, investment }) => {
               no deal
             </Text>
           )}
-
-          <Heading
-            color={useColorModeValue("gray.700", "white")}
-            fontSize={"2xl"}
-            fontFamily={"body"}
-          >
-            {brand.brand_name}
-          </Heading>
-          <Text color={"gray.500"}>{brand.idea}</Text>
+          <Text color={"gray.500"}>{idea}</Text>
         </Stack>
       </Box>
     </Center>
