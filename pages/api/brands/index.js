@@ -10,7 +10,7 @@ const handler = async (req, res) => {
   const jsonData = getJsonArrayFromData(data);
 
   if (jsonData) {
-    res.status(200).json({ brands: jsonData });
+    res.status(200).json(jsonData);
   }
 };
 

@@ -7,7 +7,6 @@ const H1 = ({ children }) => {
       fontSize={["3xl", "5xl"]}
       textTransform="capitalize"
       fontWeight="extrabold"
-      textAlign="center"
     >
       {children}
     </Heading>

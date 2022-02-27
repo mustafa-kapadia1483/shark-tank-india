@@ -1,16 +1,16 @@
 import { useEffect, useContext } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text, VStack } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
 import AmountBadges from "../components/ui/AmountBadges";
 import BrandList from "../components/ui/BrandList";
 import H2 from "../components/ui/H2";
-import Hero from "../components/ui/Hero";
 import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
 import numFormatter from "../helpers/numberFormatter";
 import queryGoogleSheet from "../helpers/queryGoogleSheet";
 import { Context } from "../state/Context";
+import H1 from "../components/ui/H1";
 
 export default function Home({
   investments,
@@ -29,42 +29,49 @@ export default function Home({
       <Head>
         <title>Shark Tank India Stats</title>
       </Head>
-      <Hero
-        moneyOnEquity={numFormatter(moneyGivenForEquity)}
-        moneyAsDebt={numFormatter(moneyGivenAsDebt)}
-        totalBrands={totalPitches}
-      />
-      <Flex
-        flexWrap="wrap"
-        justifyContent="center"
-        alignItems="center"
-        gap="10"
-        marginTop="5"
-      >
-        <AmountBadges
-          amount={numFormatter(moneyGivenForEquity, true) + "+"}
-          title="Spent On Equity"
-        />
-        <AmountBadges
-          amount={numFormatter(moneyGivenAsDebt, true) + "+"}
-          title="Spent As Debt"
-        />
-        <AmountBadges amount={totalPitches} title="Brands" />
-      </Flex>
-      <Flex
-        marginTop="10"
-        maxWidth="full"
-        justifyContent={["none", "center"]}
-        position="relative"
-      >
-        <Image
-          src="/home_banner.jpg"
-          width="694"
-          height="400"
-          alt="Banner Image"
-          objectFit="fill"
-        />
-      </Flex>
+      <Stack flexDirection={"row"} align={"center"} justify={"space-between"}>
+        <Box flexDirection={"column"}>
+          <H1>
+            <Text display="inline-block" color="blue.400">
+              shark tank
+            </Text>
+            <Text ml={2} display="inline-block" color="yellow.300">
+              india stats
+            </Text>
+          </H1>
+          <Flex
+            flexWrap="wrap"
+            justifyContent="flex-start"
+            alignItems="center"
+            gap="10"
+            marginTop="5"
+          >
+            <AmountBadges
+              amount={numFormatter(moneyGivenForEquity, true) + "+"}
+              title="Spent On Equity"
+            />
+            <AmountBadges
+              amount={numFormatter(moneyGivenAsDebt, true) + "+"}
+              title="Spent As Debt"
+            />
+            <AmountBadges amount={totalPitches} title="Brands" />
+          </Flex>
+        </Box>
+        <Flex
+          marginTop="10"
+          maxWidth="full"
+          justifyContent={["none", "center"]}
+          position="relative"
+        >
+          <Image
+            src="/home_banner.jpg"
+            width="620"
+            height="380"
+            alt="Banner Image"
+            objectFit="fill"
+          />
+        </Flex>
+      </Stack>
       <Box mt="24">
         <H2 color="yellow.300">Pitches</H2>
         <Box marginTop="10" id="brands">
@@ -94,7 +101,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach(investment => {
+  investments.forEach((investment) => {
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
       : 0;

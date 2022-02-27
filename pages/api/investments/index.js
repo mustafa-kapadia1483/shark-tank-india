@@ -8,7 +8,7 @@ const handler = async (req, res) => {
   const data = response.data.values;
   const jsonData = getJsonArrayFromData(data);
   if (jsonData) {
-    res.status(200).json({ investments: jsonData });
+    res.status(200).json(jsonData);
   }
 };
 
