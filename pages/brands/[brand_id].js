@@ -4,12 +4,8 @@ import Image from "next/image";
 import DealBadge from "../../components/ui/DealBadge";
 import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
+import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
-
-const isNull = val => {
-  if (val === "NA" || val === "FALSE") return false;
-  return true;
-};
 
 export default function IndividualBrandPage({ investment, brand }) {
   const [
@@ -124,10 +120,12 @@ export default function IndividualBrandPage({ investment, brand }) {
             <HStack>
               <Text>Investment By:</Text>
               <HStack wrap={"wrap"} rowGap="2.5">
-                {sharks.map(shark => (
+                {sharks.map(({ invested, name }) => (
                   <>
-                    {isNull(shark.invested) && (
-                      <Badge colorScheme="purple">{shark.name}</Badge>
+                    {!isNA(invested) && (
+                      <Badge key={name} colorScheme="purple">
+                        {name}
+                      </Badge>
                     )}
                   </>
                 ))}

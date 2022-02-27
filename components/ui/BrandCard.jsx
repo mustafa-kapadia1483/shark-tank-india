@@ -4,20 +4,20 @@ import {
   Text,
   Stack,
   useColorModeValue,
-  Avatar,
   VStack,
   Badge,
+  Avatar,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { CgUnavailable } from "react-icons/cg";
+import isNA from "../../helpers/isNA";
 import DealBadge from "./DealBadge";
+import BrandAvatar from "./Avatar";
 
 const BrandCard = ({
-  brand: { brand_id, brand_name, idea, industry, website },
+  brand: { brand_id, brand_name, idea, industry, icon },
   investment: { sharks_in_deal, deal_amount, deal_equity, deal_debt },
 }) => {
-  website = website.replace("https://", "");
-  website = website.replace("www.", "");
   return (
     <Link href={`/brands/${brand_id}`} passHref>
       <Box
@@ -38,12 +38,11 @@ const BrandCard = ({
       >
         <Stack spacing={"5"}>
           <VStack spacing="5">
-            <Avatar
-              size="2xl"
-              icon={<CgUnavailable />}
-              src={`https://logo.clearbit.com/${website}`}
-              loading="lazy"
-            />
+            {isNA(icon) ? (
+              <Avatar size="2xl" name={brand_name} />
+            ) : (
+              <BrandAvatar imageSrc={icon} alt={brand_name} />
+            )}
             <VStack spacing="2.5">
               <Heading
                 color={useColorModeValue("gray.700", "white")}
