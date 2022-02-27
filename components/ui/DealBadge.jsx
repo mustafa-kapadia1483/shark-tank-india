@@ -9,15 +9,22 @@ const dealString = (equityAmt, equityPercentage, debtAmt = null) => {
     dealStr += ` and ${numFormatter(parseFloat(debtAmt) * 100000)} Debt`;
   return dealStr;
 };
-const DealBadge = ({ dealAmount, dealEquity, dealDebt, sharksInDeal }) => {
+const DealBadge = ({
+  equityAmount,
+  equity,
+  debtAmount,
+  sharksInDeal,
+  successMsg = "Deal Got: ",
+  successColor = "green.500",
+}) => {
   return (
     <>
       {parseInt(sharksInDeal) ? (
-        <Text color="green.500">
-          Deal Got:{" "}
-          {parseInt(dealDebt)
-            ? dealString(dealAmount, dealEquity, dealDebt)
-            : dealString(dealAmount, dealEquity)}
+        <Text color={successColor}>
+          {successMsg}
+          {parseInt(debtAmount)
+            ? dealString(equityAmount, equity, debtAmount)
+            : dealString(equityAmount, equity)}
         </Text>
       ) : (
         <Text color="red.500">No Deal</Text>

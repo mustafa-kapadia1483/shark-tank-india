@@ -57,9 +57,9 @@ const BrandCard = ({
           </VStack>
           <Box>
             <DealBadge
-              dealAmount={deal_amount}
-              dealEquity={deal_equity}
-              dealDebt={deal_debt}
+              equityAmount={deal_amount}
+              equity={deal_equity}
+              debtAmount={deal_debt}
               sharksInDeal={sharks_in_deal}
             />
             <Text color={"gray.500"}>Idea: {idea}</Text>
