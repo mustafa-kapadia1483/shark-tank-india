@@ -10,20 +10,15 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { CgUnavailable } from "react-icons/cg";
-import numFormatter from "../../helpers/numberFormatter";
+import DealBadge from "./DealBadge";
 
 const BrandCard = ({
   brand: { brand_id, brand_name, idea, industry, website },
   investment: { sharks_in_deal, deal_amount, deal_equity, deal_debt },
 }) => {
-  const dealString = (equityAmt, equityPercentage, debtAmt = null) => {
-    let dealStr = `${numFormatter(
-      parseFloat(equityAmt) * 100000
-    )} for ${equityPercentage}%`;
-    if (debtAmt)
-      dealStr += ` and ${numFormatter(parseFloat(debtAmt) * 100000)} Debt`;
-    return dealStr;
-  };
+  website = website.replace("https://", "");
+  website = website.replace("www.", "");
+  console.log(`https://logo.clearbit.com/${website}`);
   return (
     <Link href={`/brands/${brand_id}`} passHref>
       <Box
@@ -62,16 +57,12 @@ const BrandCard = ({
             </VStack>
           </VStack>
           <Box>
-            {parseInt(sharks_in_deal) ? (
-              <Text color="green.500">
-                Deal Got:{" "}
-                {parseFloat(deal_debt)
-                  ? dealString(deal_amount, deal_equity, deal_debt)
-                  : dealString(deal_amount, deal_equity)}
-              </Text>
-            ) : (
-              <Text color="red.500">No Deal</Text>
-            )}
+            <DealBadge
+              dealAmount={deal_amount}
+              dealEquity={deal_equity}
+              dealDebt={deal_debt}
+              sharksInDeal={sharks_in_deal}
+            />
             <Text color={"gray.500"}>Idea: {idea}</Text>
           </Box>
         </Stack>
