@@ -77,6 +77,7 @@ export default function IndividualBrandPage({ investment, brand }) {
                 height="80px"
                 objectFit="contain"
                 objectPosition="center"
+                alt={`${brand_name} logo`}
               />
             )}
           </Box>

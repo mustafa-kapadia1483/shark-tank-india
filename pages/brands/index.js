@@ -60,11 +60,9 @@ const BrandsPage = () => {
         </H2>
 
         <InputGroup mt={10} justifyContent="space-between">
-          <InputLeftElement
-            pointerEvents="none"
-            children={<SearchIcon color="blue.100" />}
-            mt={1}
-          />
+          <InputLeftElement pointerEvents="none" mt={1}>
+            <SearchIcon color="blue.100" />
+          </InputLeftElement>
           <Input
             size={"lg"}
             type={"search"}
