@@ -15,7 +15,16 @@ import DealBadge from "./DealBadge";
 import BrandAvatar from "./Avatar";
 
 const BrandCard = ({
-  brand: { brand_id, brand_name, idea, industry, icon },
+  brand: {
+    brand_id,
+    brand_name,
+    idea,
+    industry,
+    icon,
+    season_no,
+    episode_no,
+    episode_title,
+  },
   investment: { sharks_in_deal, deal_amount, deal_equity, deal_debt },
 }) => {
   return (
@@ -23,10 +32,9 @@ const BrandCard = ({
       <Box
         as="li"
         maxW={"445px"}
-        py={10}
-        px={6}
+        p={10}
         width={{ base: "100%", lg: "350px" }}
-        height={{ base: "auto", lg: "400px" }}
+        height={{ base: "auto", lg: "420px" }}
         bg={useColorModeValue("white", "gray.900")}
         borderWidth="thin"
         borderColor={"gray.700"}
@@ -61,7 +69,12 @@ const BrandCard = ({
               debtAmount={deal_debt}
               sharksInDeal={sharks_in_deal}
             />
-            <Text color={"gray.500"}>Idea: {idea}</Text>
+            <Text color={"gray.500"} marginTop="2.5" fontSize="lg">
+              Idea: {idea}
+            </Text>
+            <Text color={"gray.600"} marginTop="1">
+              Season {season_no}, Episode: {episode_no} <br /> {episode_title}
+            </Text>
           </Box>
         </Stack>
       </Box>
