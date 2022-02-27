@@ -1,3 +1,4 @@
+import { useEffect, useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -9,6 +10,7 @@ import getJsonArrayFromData from "../helpers/getJsonArrayFromData";
 import googleSheetsAuth from "../helpers/googleSheetsAuth";
 import numFormatter from "../helpers/numberFormatter";
 import queryGoogleSheet from "../helpers/queryGoogleSheet";
+import { Context } from "../state/Context";
 
 export default function Home({
   investments,
@@ -17,6 +19,11 @@ export default function Home({
   moneyGivenAsDebt,
   totalPitches,
 }) {
+  const { setInvestments, setBrands } = useContext(Context);
+  useEffect(() => {
+    setInvestments(investments);
+    setBrands(brands);
+  }, []);
   return (
     <>
       <Head>
@@ -59,7 +66,7 @@ export default function Home({
         />
       </Flex>
       <Box mt="24">
-        <H2 color="yellow.300">Brands</H2>
+        <H2 color="yellow.300">Pitches</H2>
         <Box marginTop="10" id="brands">
           <BrandList investments={investments} brands={brands} />
         </Box>
@@ -87,7 +94,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach(investment => {
+  investments.forEach((investment) => {
     //console.log(parseInt(investment.deal_amount));
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
