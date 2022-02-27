@@ -94,8 +94,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach((investment) => {
-    //console.log(parseInt(investment.deal_amount));
+  investments.forEach(investment => {
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
       : 0;

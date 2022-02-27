@@ -25,7 +25,6 @@ export default function IndividualBrandPage({ investment, brand }) {
     icon,
   ] = brand;
 
-  console.log(icon);
   return (
     <Box>
       <HStack spacing="4" align="flex-start">

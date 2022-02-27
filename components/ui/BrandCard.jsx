@@ -18,7 +18,6 @@ const BrandCard = ({
 }) => {
   website = website.replace("https://", "");
   website = website.replace("www.", "");
-  console.log(`https://logo.clearbit.com/${website}`);
   return (
     <Link href={`/brands/${brand_id}`} passHref>
       <Box
