@@ -17,7 +17,7 @@ const handler = async (req, res) => {
     idea: data[2],
   };
 
-  res.status(200).json({ brand: jsonData });
+  res.status(200).json(jsonData);
 };
 
 export default handler;
