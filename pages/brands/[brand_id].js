@@ -42,6 +42,9 @@ export default function IndividualBrandPage({ investment, brand }) {
     founder_3,
     founder_4,
     icon,
+    seasonNo,
+    episodeNo,
+    episodeTitle,
   ] = brand;
 
   const sharks = [
@@ -134,6 +137,12 @@ export default function IndividualBrandPage({ investment, brand }) {
           )}
         </VStack>
       </Stack>
+      <Box marginTop="5">
+        <Text fontSize="lg">Idea: {idea}</Text>
+        <Text color="gray.400">
+          {`Appeared In Season ${seasonNo}, Episode: ${episodeNo} Titled: ${episodeTitle}`}
+        </Text>
+      </Box>
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
       </Box>
@@ -150,7 +159,7 @@ export async function getServerSideProps({ query }) {
   const investmentRange = `investments!B${row_id}:P${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
 
-  const brandRange = `brands!A${row_id}:P${row_id}`;
+  const brandRange = `brands!A${row_id}:S${row_id}`;
   const brandResponse = await queryGoogleSheet(sheets, brandRange);
 
   // Result
