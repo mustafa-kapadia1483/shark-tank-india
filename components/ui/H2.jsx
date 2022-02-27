@@ -1,14 +1,19 @@
 import { Heading } from "@chakra-ui/react";
 
-const H2 = ({ children, color }) => {
+const H2 = ({
+  children,
+  color,
+  textAlign = "left",
+  fontSize = ["2xl", "4xl"],
+}) => {
   return (
     <Heading
       color={color}
       as="h2"
-      fontSize={["2xl", "4xl"]}
+      fontSize={fontSize}
       textTransform="capitalize"
       fontWeight="extrabold"
-      textAlign="center"
+      textAlign={textAlign}
     >
       {children}
     </Heading>

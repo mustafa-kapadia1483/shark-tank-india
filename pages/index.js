@@ -29,51 +29,49 @@ export default function Home({
       <Head>
         <title>Shark Tank India Stats</title>
       </Head>
-      <Stack flexDirection={"row"} align={"center"} justify={"space-between"}>
-        <Box flexDirection={"column"}>
-          <H1>
-            <Text display="inline-block" color="blue.400">
-              shark tank
-            </Text>
-            <Text ml={2} display="inline-block" color="yellow.300">
-              india stats
-            </Text>
-          </H1>
-          <Flex
-            flexWrap="wrap"
-            justifyContent="flex-start"
-            alignItems="center"
-            gap="10"
-            marginTop="5"
-          >
-            <AmountBadges
-              amount={numFormatter(moneyGivenForEquity, true) + "+"}
-              title="Spent On Equity"
-            />
-            <AmountBadges
-              amount={numFormatter(moneyGivenAsDebt, true) + "+"}
-              title="Spent As Debt"
-            />
-            <AmountBadges amount={totalPitches} title="Brands" />
-          </Flex>
-        </Box>
-        <Flex
-          marginTop="10"
-          maxWidth="full"
-          justifyContent={["none", "center"]}
-          position="relative"
-        >
-          <Image
-            src="/home_banner.jpg"
-            width="620"
-            height="380"
-            alt="Banner Image"
-            objectFit="fill"
-          />
-        </Flex>
-      </Stack>
+      <H1 textAlign="center">
+        <Text display="inline-block" color="blue.400">
+          shark tank
+        </Text>
+        <Text ml={2} display="inline-block" color="yellow.300">
+          india stats
+        </Text>
+      </H1>
+      <Flex
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        gap="10"
+        marginTop="5"
+      >
+        <AmountBadges
+          amount={numFormatter(moneyGivenForEquity, true) + "+"}
+          title="Spent On Equity"
+        />
+        <AmountBadges
+          amount={numFormatter(moneyGivenAsDebt, true) + "+"}
+          title="Spent As Debt"
+        />
+        <AmountBadges amount={totalPitches} title="Brands" />
+      </Flex>
+      <Flex
+        marginTop="10"
+        maxWidth="full"
+        justifyContent={["none", "center"]}
+        position="relative"
+      >
+        <Image
+          src="/home_banner.jpg"
+          width="620"
+          height="380"
+          alt="Banner Image"
+          objectFit="fill"
+        />
+      </Flex>
       <Box mt="24">
-        <H2 color="yellow.300">Pitches</H2>
+        <H2 color="yellow.300" textAlign="center">
+          Pitches
+        </H2>
         <Box marginTop="10" id="brands">
           <BrandList investments={investments} brands={brands} />
         </Box>
@@ -101,7 +99,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach((investment) => {
+  investments.forEach(investment => {
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
       : 0;

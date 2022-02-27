@@ -1,6 +1,8 @@
 import { Badge, Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import Head from "next/head";
 import Image from "next/image";
 import DealBadge from "../../components/ui/DealBadge";
+import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
 
@@ -57,6 +59,10 @@ export default function IndividualBrandPage({ investment, brand }) {
   ];
   return (
     <Box>
+      <Head>
+        <title>{brand_name}</title>
+        <meta name="description" content={idea} />
+      </Head>
       <Stack
         direction={{ base: "column", md: "row" }}
         justify={"space-between"}
@@ -86,7 +92,10 @@ export default function IndividualBrandPage({ investment, brand }) {
             </Text>
           </VStack>
         </HStack>
-        <VStack align={["flex-start", "center"]}>
+        <VStack
+          align={["flex-start", "flex-end"]}
+          spacing={{ base: "5", md: "2.5" }}
+        >
           <Box
             py="2"
             px="4"
@@ -113,7 +122,7 @@ export default function IndividualBrandPage({ investment, brand }) {
           {sharks_in_deal > 0 && (
             <HStack>
               <Text>Investment By:</Text>
-              <HStack>
+              <HStack wrap={"wrap"} rowGap="2.5">
                 {sharks.map(shark => (
                   <>
                     {isNull(shark.invested) && (
@@ -126,6 +135,9 @@ export default function IndividualBrandPage({ investment, brand }) {
           )}
         </VStack>
       </Stack>
+      <Box marginTop="10">
+        <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
+      </Box>
     </Box>
   );
 }

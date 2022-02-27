@@ -19,8 +19,8 @@ const BrandsPage = () => {
   const [filtered, setFiltered] = useState(investments);
   const [deal, setDeal] = useState(false);
 
-  const search = (text) => {
-    let filteredName = filtered.filter((i) => {
+  const search = text => {
+    let filteredName = filtered.filter(i => {
       return brands[i.brand_id - 1].brand_name
         .toLowerCase()
         .match(text.toLowerCase());
@@ -41,8 +41,8 @@ const BrandsPage = () => {
 
   useEffect(() => {
     setFiltered(investments);
-    setFiltered((i) =>
-      i.filter((j) =>
+    setFiltered(i =>
+      i.filter(j =>
         deal
           ? deal === "deal"
             ? parseInt(j.sharks_in_deal) > 0
@@ -55,7 +55,9 @@ const BrandsPage = () => {
   return (
     <>
       <Box mt="24">
-        <H2 color="yellow.300">Brands</H2>
+        <H2 color="yellow.300" textAlign="center">
+          Brands
+        </H2>
 
         <InputGroup mt={10} justifyContent="space-between">
           <InputLeftElement
@@ -67,7 +69,7 @@ const BrandsPage = () => {
             size={"lg"}
             type={"search"}
             placeholder="Search Brands"
-            onChange={(e) => search(e.target.value)}
+            onChange={e => search(e.target.value)}
             width={"95%"}
           />
           <IconButton
