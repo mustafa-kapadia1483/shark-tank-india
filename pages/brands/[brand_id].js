@@ -1,4 +1,13 @@
-import { Badge, Box, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  HStack,
+  Icon,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { IoLocationOutline } from "react-icons/io5";
 import Head from "next/head";
 import Image from "next/image";
 import DealBadge from "../../components/ui/DealBadge";
@@ -87,6 +96,12 @@ const IndividualBrandPage = ({ investment, brand }) => {
               <Badge>{industry}</Badge>
             </Box>
             <Text fontSize="sm" color="gray.400">
+              <Icon
+                as={IoLocationOutline}
+                boxSize="3"
+                verticalAlign="center"
+                marginRight="1"
+              />
               {pitchers_city},&nbsp;{pitchers_state}
             </Text>
           </VStack>
@@ -96,11 +111,11 @@ const IndividualBrandPage = ({ investment, brand }) => {
           spacing={{ base: "5", md: "2.5" }}
         >
           <Box
-            py="2"
+            py={["3", "2"]}
             px="4"
             bg="gray.900"
             borderRadius="lg"
-            border="1px"
+            borderWidth="1px"
             borderColor={["gray.600", "gray.700"]}
             boxShadow="xl"
           >
@@ -110,12 +125,17 @@ const IndividualBrandPage = ({ investment, brand }) => {
               sharksInDeal={1}
               successMsg="Original Ask: "
               successColor="gray.400"
+              dealValuation={ask_valuation}
+              breakLine={false}
             />
             <DealBadge
               equityAmount={deal_amount}
               equity={deal_equity}
               debtAmount={deal_debt}
               sharksInDeal={sharks_in_deal}
+              dealValuation={deal_valuation}
+              breakLine={false}
+              mt={2}
             />
           </Box>
           {sharks_in_deal > 0 && (

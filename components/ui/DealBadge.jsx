@@ -16,21 +16,27 @@ const DealBadge = ({
   sharksInDeal,
   successMsg = "Deal Got: ",
   successColor = "green.500",
-}) => {
-  return (
-    <>
-      {parseInt(sharksInDeal) ? (
-        <Text color={successColor}>
-          {successMsg}
-          {parseInt(debtAmount)
-            ? dealString(equityAmount, equity, debtAmount)
-            : dealString(equityAmount, equity)}
-        </Text>
-      ) : (
-        <Text color="red.500">No Deal</Text>
-      )}
-    </>
-  );
-};
+  dealValuation,
+  breakLine = true,
+  mt = 0,
+}) => (
+  <>
+    {console.log(breakLine, breakLine.sm)}
+    {parseInt(sharksInDeal) ? (
+      <Text mt={mt} color={successColor} whiteSpace="pre-line">
+        {successMsg}
+        {parseInt(debtAmount)
+          ? dealString(equityAmount, equity, debtAmount)
+          : dealString(equityAmount, equity)}
+        {breakLine ? "\n" : " "}
+        At Valuation: {numFormatter(dealValuation * 100000)}
+      </Text>
+    ) : (
+      <Text mt={mt} color="red.500">
+        No Deal
+      </Text>
+    )}
+  </>
+);
 
 export default DealBadge;
