@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
+import { ImCross } from "react-icons/im";
 import { useContext, useEffect, useState } from "react";
 import BrandList from "../../components/ui/BrandList";
 import H2 from "../../components/ui/H2";
@@ -18,9 +19,10 @@ const BrandsPage = () => {
     useContext(Context);
   const [filtered, setFiltered] = useState(investments);
   const [deal, setDeal] = useState(false);
+  const [show, setShow] = useState(false);
 
-  const search = text => {
-    let filteredName = filtered.filter(i => {
+  const search = (text) => {
+    let filteredName = filtered.filter((i) => {
       return brands[i.brand_id - 1].brand_name
         .toLowerCase()
         .match(text.toLowerCase());
@@ -40,9 +42,16 @@ const BrandsPage = () => {
   // setInvestments(invest);
 
   useEffect(() => {
+    if (investments.length === 0) {
+      setInvestments(JSON.parse(localStorage.getItem("investments")));
+      setBrands(JSON.parse(localStorage.getItem("brands")));
+    }
+  }, []);
+
+  useEffect(() => {
     setFiltered(investments);
-    setFiltered(i =>
-      i.filter(j =>
+    setFiltered((i) =>
+      i.filter((j) =>
         deal
           ? deal === "deal"
             ? parseInt(j.sharks_in_deal) > 0
@@ -50,7 +59,7 @@ const BrandsPage = () => {
           : true
       )
     );
-  }, [deal]);
+  }, [deal, investments]);
 
   return (
     <>
@@ -67,25 +76,39 @@ const BrandsPage = () => {
             size={"lg"}
             type={"search"}
             placeholder="Search Brands"
-            onChange={e => search(e.target.value)}
+            onChange={(e) => search(e.target.value)}
             width={"95%"}
           />
           <IconButton
             aria-label="Filter Investments"
-            icon={<FiFilter />}
+            icon={show ? <ImCross /> : <FiFilter />}
+            onClick={() => setShow((s) => !s)}
             size={"lg"}
           />
-          {/* <Select
-            placeholder="Select option"
-            width={"15%"}
-            size="lg"
-            onChange={(e) => setDeal(e.target.value)}
-          >
-            <option value={"deal"}>Got Deal</option>
-            <option value={"no_deal"}>No Deal</option>
-          </Select> */}
         </InputGroup>
-
+        {show && (
+          <Box
+            style={{
+              width: "100%",
+              marginTop: 10,
+              borderRadius: 10,
+              borderWidth: 2,
+              borderColor: "gray.700",
+              padding: 10,
+            }}
+          >
+            <Select
+              placeholder="Select option"
+              width={"15%"}
+              size="lg"
+              value={deal}
+              onChange={(e) => setDeal(e.target.value)}
+            >
+              <option value={"deal"}>Got Deal</option>
+              <option value={"no_deal"}>No Deal</option>
+            </Select>
+          </Box>
+        )}
         <Box marginTop="10" id="brands">
           <BrandList investments={filtered} brands={brands} />
         </Box>

@@ -7,7 +7,7 @@ import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
 
-export default function IndividualBrandPage({ investment, brand }) {
+const IndividualBrandPage = ({ investment, brand }) => {
   const [
     sharks_in_deal,
     ask_amount,
@@ -46,7 +46,6 @@ export default function IndividualBrandPage({ investment, brand }) {
     episodeNo,
     episodeTitle,
   ] = brand;
-
   const sharks = [
     { name: "Ashneer", invested: ashneer },
     { name: "Namita", invested: namita },
@@ -71,7 +70,7 @@ export default function IndividualBrandPage({ investment, brand }) {
           <Box>
             {icon !== "NA" && (
               <Image
-                src={`${icon}`}
+                src={icon}
                 width="80px"
                 height="80px"
                 objectFit="contain"
@@ -148,7 +147,9 @@ export default function IndividualBrandPage({ investment, brand }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default IndividualBrandPage;
 
 export async function getServerSideProps({ query }) {
   const sheets = await googleSheetsAuth();

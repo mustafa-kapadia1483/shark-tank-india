@@ -22,7 +22,10 @@ export default function Home({
   const { setInvestments, setBrands } = useContext(Context);
   useEffect(() => {
     setInvestments(investments);
+
     setBrands(brands);
+    localStorage.setItem("investments", JSON.stringify(investments));
+    localStorage.setItem("brands", JSON.stringify(brands));
   }, []);
   return (
     <>
@@ -99,7 +102,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach(investment => {
+  investments.forEach((investment) => {
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
       : 0;
