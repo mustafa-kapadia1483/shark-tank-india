@@ -9,23 +9,19 @@ import {
   Avatar,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { CgUnavailable } from "react-icons/cg";
 import isNA from "../../helpers/isNA";
 import DealBadge from "./DealBadge";
 import BrandAvatar from "./Avatar";
 
 const BrandCard = ({
-  brand: {
-    brand_id,
-    brand_name,
-    idea,
-    industry,
-    icon,
-    season_no,
-    episode_no,
-    episode_title,
+  brand: { brand_id, brand_name, idea, industry, icon, season_no, episode_no },
+  investment: {
+    sharks_in_deal,
+    deal_amount,
+    deal_equity,
+    deal_debt,
+    deal_valuation,
   },
-  investment: { sharks_in_deal, deal_amount, deal_equity, deal_debt },
 }) => {
   return (
     <Link href={`/brands/${brand_id}`} passHref>
@@ -68,12 +64,13 @@ const BrandCard = ({
               equity={deal_equity}
               debtAmount={deal_debt}
               sharksInDeal={sharks_in_deal}
+              dealValuation={parseInt(deal_valuation)}
             />
             <Text color={"gray.500"} marginTop="2.5" fontSize="lg">
               Idea: {idea}
             </Text>
             <Text color={"gray.600"} marginTop="1">
-              Season {season_no}, Episode: {episode_no} <br /> {episode_title}
+              Season {season_no}, Episode: {episode_no}
             </Text>
           </Box>
         </Stack>
