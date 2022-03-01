@@ -6,6 +6,7 @@ import {
   InputLeftElement,
   Select,
   IconButton,
+  Stack,
 } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
@@ -22,8 +23,8 @@ const BrandsPage = () => {
   const [sortVal, setSortVal] = useState(false);
   const [show, setShow] = useState(false);
 
-  const search = (text) => {
-    let filteredName = filtered.filter((i) => {
+  const search = text => {
+    let filteredName = filtered.filter(i => {
       return brands[i.brand_id - 1].brand_name
         .toLowerCase()
         .match(text.toLowerCase());
@@ -44,15 +45,15 @@ const BrandsPage = () => {
 
   useEffect(() => {
     if (investments.length === 0) {
-      setInvestments(JSON.parse(localStorage.getItem("investments")));
-      setBrands(JSON.parse(localStorage.getItem("brands")));
+      setInvestments(JSON.parse(localStorage.getItem("investments")) || []);
+      setBrands(JSON.parse(localStorage.getItem("brands")) || []);
     }
   }, []);
 
   useEffect(() => {
     setFiltered(investments);
-    setFiltered((i) => {
-      let temp = i.filter((j) =>
+    setFiltered(i => {
+      let temp = i.filter(j =>
         deal
           ? deal === "deal"
             ? parseInt(j.sharks_in_deal) > 0
@@ -86,36 +87,38 @@ const BrandsPage = () => {
             size={"lg"}
             type={"search"}
             placeholder="Search Brands"
-            onChange={(e) => search(e.target.value)}
+            onChange={e => search(e.target.value)}
             width={"95%"}
           />
           <IconButton
             aria-label="Filter Investments"
             icon={show ? <ImCross /> : <FiFilter />}
-            onClick={() => setShow((s) => !s)}
+            onClick={() => setShow(s => !s)}
             size={"lg"}
           />
         </InputGroup>
         {show && (
-          <Box
-            style={{
-              width: "100%",
-              marginTop: 10,
-              borderRadius: 10,
-              borderWidth: 2,
-              borderColor: "gray.700",
-              padding: 10,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-            }}
+          <Stack
+            direction={["column", "row"]}
+            width="full"
+            marginTop={3}
+            borderRadius={10}
+            borderWidth={0}
+            borderColor="gray.700"
+            spacing={["2.5", "5"]}
+            p={3}
+            borderWidth={"1px"}
+            borderColor={"gray.700"}
           >
             <Select
               placeholder="Select Deal Outcome"
-              size="lg"
+              size={"lg"}
               value={deal}
-              width={"20%"}
-              onChange={(e) => setDeal(e.target.value)}
+              width={"auto"}
+              border={"none"}
+              bg={"gray.700"}
+              fontSize={["sm", "lg"]}
+              onChange={e => setDeal(e.target.value)}
             >
               <option value={"deal"}>Got Deal</option>
               <option value={"no_deal"}>No Deal</option>
@@ -123,14 +126,17 @@ const BrandsPage = () => {
             <Select
               placeholder="Sort Valuation"
               size="lg"
-              maxWidth={"20%"}
               value={sortVal}
-              onChange={(e) => setSortVal(e.target.value)}
+              width={"auto"}
+              border={"none"}
+              bg={"gray.700"}
+              fontSize={["sm", "lg"]}
+              onChange={e => setSortVal(e.target.value)}
             >
               <option value={"high"}>Highest to Lowest </option>
               <option value={"low"}>Lowest to Highest </option>
             </Select>
-          </Box>
+          </Stack>
         )}
         <Box marginTop="10" id="brands">
           <BrandList investments={filtered} brands={brands} />
