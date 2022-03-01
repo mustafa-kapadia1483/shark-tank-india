@@ -103,8 +103,6 @@ const BrandsPage = () => {
             width="full"
             marginTop={3}
             borderRadius={10}
-            borderWidth={0}
-            borderColor="gray.700"
             spacing={["2.5", "5"]}
             p={3}
             borderWidth={"1px"}
