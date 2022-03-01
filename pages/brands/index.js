@@ -19,6 +19,7 @@ const BrandsPage = () => {
     useContext(Context);
   const [filtered, setFiltered] = useState(investments);
   const [deal, setDeal] = useState(false);
+  const [sortVal, setSortVal] = useState(false);
   const [show, setShow] = useState(false);
 
   const search = (text) => {
@@ -50,16 +51,25 @@ const BrandsPage = () => {
 
   useEffect(() => {
     setFiltered(investments);
-    setFiltered((i) =>
-      i.filter((j) =>
+    setFiltered((i) => {
+      let temp = i.filter((j) =>
         deal
           ? deal === "deal"
             ? parseInt(j.sharks_in_deal) > 0
             : parseInt(j.sharks_in_deal) === 0
           : true
-      )
-    );
-  }, [deal, investments]);
+      );
+      if (sortVal)
+        temp = temp.sort((x, y) =>
+          sortVal === "high"
+            ? parseInt(y.deal_valuation || "0") -
+              parseInt(x.deal_valuation || "0")
+            : parseInt(x.deal_valuation || "0") -
+              parseInt(y.deal_valuation || "0")
+        );
+      return temp;
+    });
+  }, [deal, investments, sortVal]);
 
   return (
     <>
@@ -95,17 +105,30 @@ const BrandsPage = () => {
               borderWidth: 2,
               borderColor: "gray.700",
               padding: 10,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
             }}
           >
             <Select
-              placeholder="Select option"
-              width={"15%"}
+              placeholder="Select Deal Outcome"
               size="lg"
               value={deal}
+              width={"20%"}
               onChange={(e) => setDeal(e.target.value)}
             >
               <option value={"deal"}>Got Deal</option>
               <option value={"no_deal"}>No Deal</option>
+            </Select>
+            <Select
+              placeholder="Sort Valuation"
+              size="lg"
+              maxWidth={"20%"}
+              value={sortVal}
+              onChange={(e) => setSortVal(e.target.value)}
+            >
+              <option value={"high"}>Highest to Lowest </option>
+              <option value={"low"}>Lowest to Highest </option>
             </Select>
           </Box>
         )}
