@@ -21,7 +21,6 @@ const DealBadge = ({
   mt = 0,
 }) => (
   <>
-    {console.log(breakLine, breakLine.sm)}
     {parseInt(sharksInDeal) ? (
       <Text mt={mt} color={successColor} whiteSpace="pre-line">
         {successMsg}
