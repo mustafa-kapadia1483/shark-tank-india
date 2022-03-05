@@ -5,7 +5,7 @@ import { google } from "googleapis";
 
 let isSecretsJson = false;
 
-const createSecretsJson = () => {
+const createSecretsJson = async () => {
   const baseDir = await fsp.mkdtemp(
     (await fsp.realpath(os.tmpdir())) + path.sep
   );
@@ -20,7 +20,7 @@ const createSecretsJson = () => {
 
 const googleSheetsAuth = async () => {
   if (!isSecretsJson) {
-    isSecretsJson = createSecretsJson();
+    isSecretsJson = await createSecretsJson();
   }
   const googleAuth = await google.auth.getClient({
     scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
