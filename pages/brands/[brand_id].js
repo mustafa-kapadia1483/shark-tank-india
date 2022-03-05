@@ -1,12 +1,15 @@
 import {
   Badge,
   Box,
+  Button,
   HStack,
   Icon,
   Stack,
   Text,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Head from "next/head";
 import Image from "next/image";
@@ -65,6 +68,8 @@ const IndividualBrandPage = ({ investment, brand }) => {
     { name: "Peyush", invested: peyush },
     { name: "Ghazal", invested: ghazal },
   ];
+
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
       <Head>
@@ -169,9 +174,19 @@ const IndividualBrandPage = ({ investment, brand }) => {
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
         {about && (
-          <Text as="p" color="gray.300">
-            {about}
-          </Text>
+          <VStack align="flex-end" mt={2}>
+            <Text noOfLines={isOpen ? "none" : 3} as="p" color="gray.300">
+              {about}
+            </Text>
+            <Button
+              onClick={onToggle}
+              variant="outline"
+              size="sm"
+              rightIcon={isOpen ? <BsChevronUp /> : <BsChevronDown />}
+            >
+              {isOpen ? "Read Less" : "Read More"}
+            </Button>
+          </VStack>
         )}
       </Box>
     </Box>
