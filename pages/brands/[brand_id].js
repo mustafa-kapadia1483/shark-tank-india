@@ -54,6 +54,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     seasonNo,
     episodeNo,
     episodeTitle,
+    about,
   ] = brand;
   const sharks = [
     { name: "Ashneer", invested: ashneer },
@@ -68,7 +69,10 @@ const IndividualBrandPage = ({ investment, brand }) => {
     <Box>
       <Head>
         <title>{brand_name}</title>
-        <meta name="description" content={idea} />
+        <meta
+          name="description"
+          content={about ? about.substring(0, 160) : idea}
+        />
       </Head>
       <Stack
         direction={{ base: "column", md: "row" }}
@@ -77,7 +81,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
       >
         <HStack spacing="4" align="flex-start">
           <Box>
-            {icon !== "NA" && (
+            {!isNA(icon) && (
               <Image
                 src={icon}
                 width="80px"
@@ -164,6 +168,11 @@ const IndividualBrandPage = ({ investment, brand }) => {
       </Box>
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
+        {about && (
+          <Text as="p" color="gray.300">
+            {about}
+          </Text>
+        )}
       </Box>
     </Box>
   );
@@ -180,7 +189,7 @@ export async function getServerSideProps({ query }) {
   const investmentRange = `investments!B${row_id}:P${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
 
-  const brandRange = `brands!A${row_id}:S${row_id}`;
+  const brandRange = `brands!A${row_id}:T${row_id}`;
   const brandResponse = await queryGoogleSheet(sheets, brandRange);
 
   // Result
