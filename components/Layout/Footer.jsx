@@ -21,8 +21,10 @@ const Footer = () => {
       <Container marginTop="20" maxWidth={{ base: "95%", lg: "container.xl" }}>
         <Stack
           py="5"
-          direction={{ lg: "row" }}
+          direction={{ base: "column", lg: "row" }}
           justify={{ lg: "space-between" }}
+          spacin="2.5"
+          textAlign="center"
         >
           <Link href="https://github.com/mustafa-kapadia1483/sti" passhref>
             <Button leftIcon={<BsGithub />} variant="link">
@@ -38,18 +40,30 @@ const Footer = () => {
               color="red.500"
             />
             by&nbsp;
-            <Link href="https://mustafa-kapadia.netlify.app/">
+            <Link href="https://mustafa-kapadia.netlify.app/" isExternal>
               Mustafa Kapadia
             </Link>
           </Text>
-          <HStack spacing="5">
-            <Link href="https://www.linkedin.com/in/mustafa-kapadia">
+          <HStack spacing="5" justify="center">
+            <Link
+              href="https://www.linkedin.com/in/mustafa-kapadia"
+              isExternal
+              passhref
+            >
               <Icon as={BsLinkedin} />
             </Link>
-            <Link href="hhttps://github.com/mustafa-kapadia1483">
+            <Link
+              href="hhttps://github.com/mustafa-kapadia1483"
+              isExternal
+              passhref
+            >
               <Icon as={BsGithub} />
             </Link>
-            <Link href="https://www.instagram.com/mustafa.kapadia/">
+            <Link
+              href="https://www.instagram.com/mustafa.kapadia/"
+              isExternal
+              passhref
+            >
               <Icon as={BsInstagram} />
             </Link>
           </HStack>
