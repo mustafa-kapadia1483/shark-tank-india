@@ -81,7 +81,7 @@ export default function Home({
         <H2 color="yellow.300" textAlign="center">
           Pitches
         </H2>
-        <VStack marginTop="10" id="brands" spacing={10}>
+        <VStack marginTop="10" id="brands" spacing={10} marginBottom={10}>
           <BrandList
             investments={investments.slice(0, 6)}
             brands={brands.slice(0, 6)}
