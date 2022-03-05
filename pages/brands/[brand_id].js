@@ -1,12 +1,15 @@
 import {
   Badge,
   Box,
+  Button,
   HStack,
   Icon,
   Stack,
   Text,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Head from "next/head";
 import Image from "next/image";
@@ -54,6 +57,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     seasonNo,
     episodeNo,
     episodeTitle,
+    about,
   ] = brand;
   const sharks = [
     { name: "Ashneer", invested: ashneer },
@@ -64,11 +68,16 @@ const IndividualBrandPage = ({ investment, brand }) => {
     { name: "Peyush", invested: peyush },
     { name: "Ghazal", invested: ghazal },
   ];
+
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
       <Head>
         <title>{brand_name}</title>
-        <meta name="description" content={idea} />
+        <meta
+          name="description"
+          content={about ? about.substring(0, 160) : idea}
+        />
       </Head>
       <Stack
         direction={{ base: "column", md: "row" }}
@@ -77,7 +86,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
       >
         <HStack spacing="4" align="flex-start">
           <Box>
-            {icon !== "NA" && (
+            {!isNA(icon) && (
               <Image
                 src={icon}
                 width="80px"
@@ -164,6 +173,21 @@ const IndividualBrandPage = ({ investment, brand }) => {
       </Box>
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
+        {about && (
+          <VStack align="flex-end" mt={2}>
+            <Text noOfLines={isOpen ? "none" : 3} as="p" color="gray.300">
+              {about}
+            </Text>
+            <Button
+              onClick={onToggle}
+              variant="outline"
+              size="sm"
+              rightIcon={isOpen ? <BsChevronUp /> : <BsChevronDown />}
+            >
+              {isOpen ? "Read Less" : "Read More"}
+            </Button>
+          </VStack>
+        )}
       </Box>
     </Box>
   );
@@ -180,7 +204,7 @@ export async function getServerSideProps({ query }) {
   const investmentRange = `investments!B${row_id}:P${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
 
-  const brandRange = `brands!A${row_id}:S${row_id}`;
+  const brandRange = `brands!A${row_id}:T${row_id}`;
   const brandResponse = await queryGoogleSheet(sheets, brandRange);
 
   // Result

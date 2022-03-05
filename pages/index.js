@@ -31,6 +31,10 @@ export default function Home({
     <>
       <Head>
         <title>Shark Tank India Stats</title>
+        <meta
+          name="description"
+          content="Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place"
+        />
       </Head>
       <H1 textAlign="center">
         <Text display="inline-block" color="blue.400">
@@ -65,8 +69,8 @@ export default function Home({
       >
         <Image
           src="/home_banner.jpg"
-          width="620"
-          height="380"
+          width="640"
+          height="360"
           alt="Banner Image"
           objectFit="fill"
         />
@@ -102,7 +106,7 @@ export async function getStaticProps() {
   let moneyGivenForEquity = 0;
   let moneyGivenAsDebt = 0;
 
-  investments.forEach((investment) => {
+  investments.forEach(investment => {
     moneyGivenForEquity += investment.deal_amount
       ? parseInt(investment.deal_amount)
       : 0;

@@ -2,12 +2,23 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Setting up .env.local:
+### Sheets API Setup
+
+1. From the Google Cloud console, enable the **[Google Sheets API](https://developers.google.com/sheets/api)**.
+2. Click manage, then go to the credentials tab. **Click on the App Engine default service account**.
+3. From there, click the _Keys_ tab and add an new JSON key.
+4. This will download a JSON file to your system. Save it to the root of the project as secrets.json, but do NOT expose it publicly. Add it to gitignore to be safe.
+
+5. Setting up .env.local:
 
 ```
 GOOGLE_APPLICATION_CREDENTIALS=./secrets.json
 SHEET_ID=1OSSh4hn3o9xUs9HqRWSybyK9IvFyA6wvS_PYMsccihA
 ```
+
+Google API Steps Credits: [Fireship](https://fireship.io/)
+
+---
 
 First, run the development server:
 
