@@ -1,3 +1,5 @@
+Staging Server: [![Netlify Status](https://api.netlify.com/api/v1/badges/2d26443b-dd3c-4487-b7ab-5ea92b28b728/deploy-status)](https://app.netlify.com/sites/shark-tank-india-stats/deploys)  
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
