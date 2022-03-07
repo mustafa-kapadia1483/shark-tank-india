@@ -1,5 +1,6 @@
-import { Text } from "@chakra-ui/react";
+import { Icon, Text } from "@chakra-ui/react";
 import numFormatter from "../../helpers/numberFormatter";
+import { FaRupeeSign } from "react-icons/fa";
 
 const dealString = (equityAmt, equityPercentage, debtAmt = null) => {
   let dealStr = `${numFormatter(
@@ -24,11 +25,21 @@ const DealBadge = ({
     {parseInt(sharksInDeal) ? (
       <Text mt={mt} color={successColor} whiteSpace="pre-line">
         {successMsg}
-        {parseInt(debtAmount)
-          ? dealString(equityAmount, equity, debtAmount)
-          : dealString(equityAmount, equity)}
+        {parseInt(debtAmount) ? (
+          <>
+            {<Icon as={FaRupeeSign} verticalAlign="center" boxSize="3" />}
+            {dealString(equityAmount, equity, debtAmount)}
+          </>
+        ) : (
+          <>
+            {<Icon as={FaRupeeSign} verticalAlign="center" boxSize="3" />}
+            {dealString(equityAmount, equity)}
+          </>
+        )}
         {breakLine ? "\n" : " "}
-        At Valuation: {numFormatter(dealValuation * 100000)}
+        At Valuation:{" "}
+        {<Icon as={FaRupeeSign} verticalAlign="center" boxSize="3" />}
+        {numFormatter(dealValuation * 100000)}
       </Text>
     ) : (
       <Text mt={mt} color="red.500">

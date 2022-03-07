@@ -78,6 +78,13 @@ const IndividualBrandPage = ({ investment, brand }) => {
           name="description"
           content={about ? about.substring(0, 160) : idea}
         />
+        {website && (
+          <link
+            rel="icon"
+            type="image/x-icon"
+            href={`https://s2.googleusercontent.com/s2/favicons?domain=${website}`}
+          />
+        )}
       </Head>
       <Stack
         direction={{ base: "column", md: "row" }}

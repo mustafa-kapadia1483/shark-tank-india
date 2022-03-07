@@ -14,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import BrandList from "../../components/ui/BrandList";
 import H2 from "../../components/ui/H2";
 import { Context } from "../../state/Context";
+import Head from "next/head";
 
 const BrandsPage = () => {
   const { brands, investments, setBrands, setInvestments } =
@@ -74,6 +75,9 @@ const BrandsPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Brands on Shark Tank India</title>
+      </Head>
       <Box mt="24">
         <H2 color="yellow.300" textAlign="center">
           Brands
