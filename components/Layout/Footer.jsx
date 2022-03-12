@@ -34,7 +34,7 @@ const Footer = () => {
           spacin="2.5"
           textAlign="center"
         >
-          <Link href="https://github.com/mustafa-kapadia1483/sti" passhref>
+          <Link href="https://github.com/mustafa-kapadia1483/sti" isExternal>
             <Button leftIcon={<BsGithub />} variant="link">
               Github Repo
             </Button>

@@ -15,7 +15,7 @@ import SiteLogo from "../../ui/SiteLogo";
 const Links = [
   { name: "Home", href: "/" },
   { name: "Brands", href: "/brands" },
-  { name: "Api", href: "/api=documentation" },
+  { name: "Api", href: "/api-documentation" },
 ];
 
 const NavLink = ({ children, href }) => (
