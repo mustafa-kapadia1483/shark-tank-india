@@ -4,12 +4,21 @@ import {
   Button,
   HStack,
   Icon,
+  Link,
   Stack,
+  Tag,
   Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import {
+  BsChevronDown,
+  BsChevronUp,
+  BsGlobe,
+  BsInstagram,
+  BsLinkedin,
+  BsTwitter,
+} from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Head from "next/head";
 import Image from "next/image";
@@ -18,6 +27,24 @@ import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
+
+const SocialAccountButton = ({
+  url,
+  icon: Icon,
+  colorScheme = "gray",
+  text,
+}) => (
+  <Link href={url} isExternal>
+    <Button
+      leftIcon={<Icon />}
+      colorScheme={colorScheme}
+      variant="link"
+      size="sm"
+    >
+      {text}
+    </Button>
+  </Link>
+);
 
 const IndividualBrandPage = ({ investment, brand }) => {
   const [
@@ -58,6 +85,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     episodeNo,
     episodeTitle,
     about,
+    youtubeLink,
   ] = brand;
   const sharks = [
     { name: "Ashneer", invested: ashneer },
@@ -69,6 +97,10 @@ const IndividualBrandPage = ({ investment, brand }) => {
     { name: "Ghazal", invested: ghazal },
   ];
 
+  const founders = [founder_1, founder_2, founder_3, founder_4].filter(
+    founder => !isNA(founder)
+  );
+
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
@@ -78,6 +110,13 @@ const IndividualBrandPage = ({ investment, brand }) => {
           name="description"
           content={about ? about.substring(0, 160) : idea}
         />
+        {website && (
+          <link
+            rel="icon"
+            type="image/x-icon"
+            href={`https://s2.googleusercontent.com/s2/favicons?domain=${website}`}
+          />
+        )}
       </Head>
       <Stack
         direction={{ base: "column", md: "row" }}
@@ -165,12 +204,76 @@ const IndividualBrandPage = ({ investment, brand }) => {
           )}
         </VStack>
       </Stack>
-      <Box marginTop="5">
-        <Text fontSize="lg">Idea: {idea}</Text>
-        <Text color="gray.400">
-          {`Appeared In Season ${seasonNo}, Episode: ${episodeNo} Titled: ${episodeTitle}`}
-        </Text>
+      <Box marginTop="10" order={{ lg: "2" }}>
+        <Stack
+          justify={{ md: "space-between" }}
+          direction={{ base: "column", md: "row" }}
+        >
+          <Box>
+            <Text as="h3" fontSize={{ base: "lg", md: "xl" }}>
+              Idea: {idea}
+            </Text>
+            <Text mt="1" color="gray.200">
+              Founders: {founders && founders.join(", ")}
+            </Text>
+          </Box>
+          <Tag
+            py="2.5"
+            px="5"
+            lineHeight="5"
+            color="gray.400"
+            colorScheme="teal"
+          >
+            Season {seasonNo}, Episode: {episodeNo} <br />
+            Titled: {episodeTitle}
+          </Tag>
+        </Stack>
+        <HStack mt="3" gap={["3", "5"]} wrap="wrap" justify="flex-start">
+          {website && (
+            <SocialAccountButton url={website} text="Website" icon={BsGlobe} />
+          )}
+          {instagram && (
+            <SocialAccountButton
+              url={instagram}
+              text="Instagram"
+              icon={BsInstagram}
+              colorScheme="pink"
+            />
+          )}
+          {twitter && (
+            <SocialAccountButton
+              url={`https://twitter.com/${twitter}`.replace("@", "")}
+              text="Twitter"
+              icon={BsTwitter}
+              colorScheme="twitter"
+            />
+          )}
+          {linkedin && (
+            <SocialAccountButton
+              url={linkedin}
+              text="LinkedIn"
+              icon={BsLinkedin}
+              colorScheme="linkedin"
+            />
+          )}
+        </HStack>
       </Box>
+      {/* {youtubeLink && (
+          <AspectRatio
+            order={{ lg: "1" }}
+            minW={{ base: "100%", lg: "560px" }}
+            ratio={16 / 9}
+            overflow="hidden"
+          >
+            <ReactPlayer
+              controls={true}
+              light={true}
+              width="100%"
+              height="100%"
+              url={youtubeLink}
+            />
+          </AspectRatio>
+        )} */}
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
         {about && (
@@ -204,7 +307,7 @@ export async function getServerSideProps({ query }) {
   const investmentRange = `investments!B${row_id}:P${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
 
-  const brandRange = `brands!A${row_id}:T${row_id}`;
+  const brandRange = `brands!A${row_id}:U${row_id}`;
   const brandResponse = await queryGoogleSheet(sheets, brandRange);
 
   // Result

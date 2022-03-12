@@ -15,6 +15,14 @@ import {
   BsInstagram,
 } from "react-icons/bs";
 
+const SocialLinkButton = ({ href, icon }) => {
+  return (
+    <Link href={href}>
+      <Icon as={icon} />
+    </Link>
+  );
+};
+
 const Footer = () => {
   return (
     <Box bg={"gray.900"}>
@@ -26,7 +34,7 @@ const Footer = () => {
           spacin="2.5"
           textAlign="center"
         >
-          <Link href="https://github.com/mustafa-kapadia1483/sti" passhref>
+          <Link href="https://github.com/mustafa-kapadia1483/sti" isExternal>
             <Button leftIcon={<BsGithub />} variant="link">
               Github Repo
             </Button>
@@ -45,27 +53,18 @@ const Footer = () => {
             </Link>
           </Text>
           <HStack spacing="5" justify="center">
-            <Link
+            <SocialLinkButton
               href="https://www.linkedin.com/in/mustafa-kapadia"
-              isExternal
-              passhref
-            >
-              <Icon as={BsLinkedin} />
-            </Link>
-            <Link
-              href="hhttps://github.com/mustafa-kapadia1483"
-              isExternal
-              passhref
-            >
-              <Icon as={BsGithub} />
-            </Link>
-            <Link
+              icon={() => <BsLinkedin />}
+            />
+            <SocialLinkButton
+              href="https://github.com/mustafa-kapadia1483"
+              icon={() => <BsGithub />}
+            />
+            <SocialLinkButton
               href="https://www.instagram.com/mustafa.kapadia/"
-              isExternal
-              passhref
-            >
-              <Icon as={BsInstagram} />
-            </Link>
+              icon={() => <BsInstagram />}
+            />
           </HStack>
         </Stack>
       </Container>

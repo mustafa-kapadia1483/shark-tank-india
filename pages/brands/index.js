@@ -7,6 +7,8 @@ import {
   Select,
   IconButton,
   Stack,
+  HStack,
+  Collapse,
 } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
@@ -14,6 +16,7 @@ import { useContext, useEffect, useState } from "react";
 import BrandList from "../../components/ui/BrandList";
 import H2 from "../../components/ui/H2";
 import { Context } from "../../state/Context";
+import Head from "next/head";
 
 const BrandsPage = () => {
   const { brands, investments, setBrands, setInvestments } =
@@ -72,32 +75,52 @@ const BrandsPage = () => {
     });
   }, [deal, investments, sortVal]);
 
+  const sortValuationHandler = e => {
+    setSortVal(e.target.value);
+    setDeal("deal");
+  };
+
+  const setDealHandler = e => {
+    if (e.target.value === "no_deal" && sortVal) {
+      setSortVal(false);
+    }
+    setDeal(e.target.value);
+  };
+
   return (
     <>
+      <Head>
+        <title>Brands on Shark Tank India</title>
+      </Head>
       <Box mt="24">
         <H2 color="yellow.300" textAlign="center">
           Brands
         </H2>
 
-        <InputGroup mt={10} justifyContent="space-between">
-          <InputLeftElement pointerEvents="none" mt={1}>
-            <SearchIcon color="blue.100" />
-          </InputLeftElement>
-          <Input
-            size={"lg"}
-            type={"search"}
-            placeholder="Search Brands"
-            onChange={e => search(e.target.value)}
-            width={"95%"}
-          />
+        <HStack mt={10}>
+          <InputGroup justifyContent="space-between">
+            <InputLeftElement pointerEvents="none" mt={1}>
+              <SearchIcon color="blue.100" />
+            </InputLeftElement>
+            <Input
+              size={"lg"}
+              type={"search"}
+              placeholder="Search Brands"
+              onChange={e => search(e.target.value)}
+            />
+          </InputGroup>
           <IconButton
             aria-label="Filter Investments"
             icon={show ? <ImCross /> : <FiFilter />}
             onClick={() => setShow(s => !s)}
             size={"lg"}
           />
-        </InputGroup>
-        {show && (
+        </HStack>
+        <Collapse
+          in={show}
+          transition={{ enter: { duration: 0.2 } }}
+          animateOpacity
+        >
           <Stack
             direction={["column", "row"]}
             width="full"
@@ -115,8 +138,8 @@ const BrandsPage = () => {
               width={"auto"}
               border={"none"}
               bg={"gray.700"}
-              fontSize={["sm", "lg"]}
-              onChange={e => setDeal(e.target.value)}
+              fontSize={["sm", "md"]}
+              onChange={setDealHandler}
             >
               <option value={"deal"}>Got Deal</option>
               <option value={"no_deal"}>No Deal</option>
@@ -128,14 +151,14 @@ const BrandsPage = () => {
               width={"auto"}
               border={"none"}
               bg={"gray.700"}
-              fontSize={["sm", "lg"]}
-              onChange={e => setSortVal(e.target.value)}
+              fontSize={["sm", "md"]}
+              onChange={sortValuationHandler}
             >
-              <option value={"high"}>Highest to Lowest </option>
-              <option value={"low"}>Lowest to Highest </option>
+              <option value={"high"}>High to Low </option>
+              <option value={"low"}>Low to High </option>
             </Select>
           </Stack>
-        )}
+        </Collapse>
         <Box marginTop="10" id="brands">
           <BrandList investments={filtered} brands={brands} />
         </Box>
