@@ -9,6 +9,8 @@ import {
   Stack,
   HStack,
   Collapse,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
@@ -17,6 +19,7 @@ import BrandList from "../../components/ui/BrandList";
 import H2 from "../../components/ui/H2";
 import { Context } from "../../state/Context";
 import Head from "next/head";
+import Image from "next/image";
 
 const BrandsPage = () => {
   const { brands, investments, setBrands, setInvestments } =
@@ -27,7 +30,8 @@ const BrandsPage = () => {
   const [selectIndustry, setSelectIndustry] = useState(false);
   const [show, setShow] = useState(false);
 
-  const search = text => {
+  const search = e => {
+    const text = e.target.value;
     let filteredName = filtered.filter(i => {
       return brands[i.brand_id - 1].brand_name
         .toLowerCase()
@@ -122,7 +126,7 @@ const BrandsPage = () => {
               size={"lg"}
               type={"search"}
               placeholder="Search Brands"
-              onChange={e => search(e.target.value)}
+              onChange={search}
             />
           </InputGroup>
           <IconButton
@@ -192,6 +196,18 @@ const BrandsPage = () => {
           </Stack>
         </Collapse>
         <Box marginTop="10" id="brands">
+          {filtered.length === 0 && (
+            <VStack textAlign="center">
+              <Text mb={["2", "4"]}>
+                No Results found for this filter, please try different filters
+              </Text>
+              <Image
+                src="/ashneer-time-barbaad.jpg"
+                width="533.77"
+                height="300"
+              />
+            </VStack>
+          )}
           <BrandList investments={filtered} brands={brands} />
         </Box>
       </Box>
