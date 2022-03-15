@@ -9,6 +9,8 @@ import {
   Stack,
   HStack,
   Collapse,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
@@ -17,6 +19,7 @@ import BrandList from "../../components/ui/BrandList";
 import H2 from "../../components/ui/H2";
 import { Context } from "../../state/Context";
 import Head from "next/head";
+import Image from "next/image";
 
 const BrandsPage = () => {
   const { brands, investments, setBrands, setInvestments } =
@@ -24,9 +27,11 @@ const BrandsPage = () => {
   const [filtered, setFiltered] = useState(investments);
   const [deal, setDeal] = useState(false);
   const [sortVal, setSortVal] = useState(false);
+  const [selectIndustry, setSelectIndustry] = useState(false);
   const [show, setShow] = useState(false);
 
-  const search = text => {
+  const search = e => {
+    const text = e.target.value;
     let filteredName = filtered.filter(i => {
       return brands[i.brand_id - 1].brand_name
         .toLowerCase()
@@ -63,6 +68,10 @@ const BrandsPage = () => {
             : parseInt(j.sharks_in_deal) === 0
           : true
       );
+      if (selectIndustry)
+        temp = temp.filter(
+          t => brands[t.brand_id - 1].industry === selectIndustry
+        );
       if (sortVal)
         temp = temp.sort((x, y) =>
           sortVal === "high"
@@ -71,9 +80,16 @@ const BrandsPage = () => {
             : parseInt(x.deal_valuation || "0") -
               parseInt(y.deal_valuation || "0")
         );
+
       return temp;
     });
-  }, [deal, investments, sortVal]);
+  }, [deal, investments, sortVal, selectIndustry]);
+
+  const industries = [];
+  for (const brand of brands) {
+    industries.push(brand.industry);
+  }
+  const uniqueIndustries = [...new Set(industries)];
 
   const sortValuationHandler = e => {
     setSortVal(e.target.value);
@@ -85,6 +101,10 @@ const BrandsPage = () => {
       setSortVal(false);
     }
     setDeal(e.target.value);
+  };
+
+  const selectIndustryHandler = e => {
+    setSelectIndustry(e.target.value);
   };
 
   return (
@@ -106,7 +126,7 @@ const BrandsPage = () => {
               size={"lg"}
               type={"search"}
               placeholder="Search Brands"
-              onChange={e => search(e.target.value)}
+              onChange={search}
             />
           </InputGroup>
           <IconButton
@@ -157,9 +177,37 @@ const BrandsPage = () => {
               <option value={"high"}>High to Low </option>
               <option value={"low"}>Low to High </option>
             </Select>
+            <Select
+              placeholder="Select Industry"
+              size="lg"
+              value={selectIndustry}
+              width={"auto"}
+              border={"none"}
+              bg={"gray.700"}
+              fontSize={["sm", "md"]}
+              onChange={selectIndustryHandler}
+            >
+              {uniqueIndustries.map(industry => (
+                <option key={industry} value={industry}>
+                  {industry}
+                </option>
+              ))}
+            </Select>
           </Stack>
         </Collapse>
         <Box marginTop="10" id="brands">
+          {filtered.length === 0 && (
+            <VStack textAlign="center">
+              <Text mb={["2", "4"]}>
+                No Results found for this filter, please try different filters
+              </Text>
+              <Image
+                src="/ashneer-time-barbaad.jpg"
+                width="533.77"
+                height="300"
+              />
+            </VStack>
+          )}
           <BrandList investments={filtered} brands={brands} />
         </Box>
       </Box>
