@@ -33,6 +33,8 @@ const Footer = () => {
           justify={{ lg: "space-between" }}
           spacin="2.5"
           textAlign="center"
+          as="address"
+          fontStyle="normal"
         >
           <Link href="https://github.com/mustafa-kapadia1483/sti" isExternal>
             <Button leftIcon={<BsGithub />} variant="link">
