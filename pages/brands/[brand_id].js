@@ -2,6 +2,7 @@ import {
   Badge,
   Box,
   Button,
+  Collapse,
   HStack,
   Icon,
   Link,
@@ -27,6 +28,7 @@ import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
+import YoutubePlayer from "../../components/ui/YoutubePlayer";
 
 const SocialAccountButton = ({
   url,
@@ -207,7 +209,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
       <Box marginTop="10" order={{ lg: "2" }}>
         <Stack
           justify={{ md: "space-between" }}
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "column", lg: "row" }}
         >
           <Box>
             <Text as="h3" fontSize={{ base: "lg", md: "xl" }}>
@@ -216,71 +218,64 @@ const IndividualBrandPage = ({ investment, brand }) => {
             <Text mt="1" color="gray.200">
               Founders: {founders && founders.join(", ")}
             </Text>
+            <HStack mt="3" gap={["1", "5"]} wrap="wrap" justify="flex-start">
+              {!isNA(website) && (
+                <SocialAccountButton
+                  url={website}
+                  text="Website"
+                  icon={BsGlobe}
+                />
+              )}
+              {!isNA(instagram) && (
+                <SocialAccountButton
+                  url={instagram}
+                  text="Instagram"
+                  icon={BsInstagram}
+                  colorScheme="pink"
+                />
+              )}
+              {!isNA(twitter) && (
+                <SocialAccountButton
+                  url={`https://twitter.com/${twitter}`.replace("@", "")}
+                  text="Twitter"
+                  icon={BsTwitter}
+                  colorScheme="twitter"
+                />
+              )}
+              {!isNA(linkedin) && (
+                <SocialAccountButton
+                  url={linkedin}
+                  text="LinkedIn"
+                  icon={BsLinkedin}
+                  colorScheme="linkedin"
+                />
+              )}
+            </HStack>
+            <Tag
+              mt={["2", "5"]}
+              mb={{ base: "4", lg: "0" }}
+              py="2.5"
+              px="5"
+              lineHeight="5"
+              color="gray.400"
+              colorScheme="teal"
+            >
+              Season {seasonNo}, Episode: {episodeNo} <br />
+              Titled: {episodeTitle}
+            </Tag>
           </Box>
-          <Tag
-            py="2.5"
-            px="5"
-            lineHeight="5"
-            color="gray.400"
-            colorScheme="teal"
-          >
-            Season {seasonNo}, Episode: {episodeNo} <br />
-            Titled: {episodeTitle}
-          </Tag>
+          <YoutubePlayer url={youtubeLink} />
         </Stack>
-        <HStack mt="3" gap={["3", "5"]} wrap="wrap" justify="flex-start">
-          {website && (
-            <SocialAccountButton url={website} text="Website" icon={BsGlobe} />
-          )}
-          {instagram && (
-            <SocialAccountButton
-              url={instagram}
-              text="Instagram"
-              icon={BsInstagram}
-              colorScheme="pink"
-            />
-          )}
-          {twitter && (
-            <SocialAccountButton
-              url={`https://twitter.com/${twitter}`.replace("@", "")}
-              text="Twitter"
-              icon={BsTwitter}
-              colorScheme="twitter"
-            />
-          )}
-          {linkedin && (
-            <SocialAccountButton
-              url={linkedin}
-              text="LinkedIn"
-              icon={BsLinkedin}
-              colorScheme="linkedin"
-            />
-          )}
-        </HStack>
       </Box>
-      {/* {youtubeLink && (
-          <AspectRatio
-            order={{ lg: "1" }}
-            minW={{ base: "100%", lg: "560px" }}
-            ratio={16 / 9}
-            overflow="hidden"
-          >
-            <ReactPlayer
-              controls={true}
-              light={true}
-              width="100%"
-              height="100%"
-              url={youtubeLink}
-            />
-          </AspectRatio>
-        )} */}
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
         {about && (
           <VStack align="flex-end" mt={2}>
-            <Text noOfLines={isOpen ? "none" : 3} as="p" color="gray.300">
-              {about}
-            </Text>
+            <Collapse startingHeight="20" in={isOpen}>
+              <Text noOfLines={isOpen ? "none" : 3} as="p" color="gray.300">
+                {about}
+              </Text>
+            </Collapse>
             <Button
               onClick={onToggle}
               variant="outline"
