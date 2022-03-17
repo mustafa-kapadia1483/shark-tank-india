@@ -198,9 +198,7 @@ const BrandsPage = () => {
         <Box marginTop="10" id="brands">
           {filtered.length === 0 && (
             <VStack textAlign="center">
-              <Text mb={["2", "4"]}>
-                No Results found for this filter, please try different filters
-              </Text>
+              <Text mb={["2", "4"]}>No Results found, please try again</Text>
               <Image
                 src="/ashneer-time-barbaad.jpg"
                 width="533.77"
