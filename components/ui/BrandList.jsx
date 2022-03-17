@@ -7,7 +7,7 @@ const BrandList = ({ investments, brands }) => {
       as="ul"
       marginTop={"10"}
       flexWrap="wrap"
-      justifyContent="space-between"
+      justifyContent={{ base: "center", lg: "space-between" }}
       alignItems="center"
       gap="10"
     >
