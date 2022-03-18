@@ -4,8 +4,7 @@ import queryGoogleSheet from "../../../helpers/queryGoogleSheet";
 
 const handler = async (req, res) => {
   const sheets = await googleSheetsAuth();
-
-  const response = await queryGoogleSheet(sheets, "brands!A1:H122");
+  const response = await queryGoogleSheet(sheets, "brands!A1:D122");
   const data = response.data.values;
   const jsonData = getJsonArrayFromData(data);
 
