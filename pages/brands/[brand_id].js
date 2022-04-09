@@ -294,10 +294,14 @@ const IndividualBrandPage = ({ investment, brand }) => {
 export default IndividualBrandPage;
 
 export async function getServerSideProps({ query }) {
-  const sheets = await googleSheetsAuth();
-
   // Brand id from the url
   const { brand_id } = query;
+  if (!parseInt(brand_id)) {
+    return {
+      notFound: true,
+    };
+  }
+  const sheets = await googleSheetsAuth();
   const row_id = parseInt(brand_id) + 1;
   const investmentRange = `investments!B${row_id}:P${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
