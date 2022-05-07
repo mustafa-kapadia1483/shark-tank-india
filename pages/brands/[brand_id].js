@@ -28,7 +28,6 @@ import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
-import YoutubePlayer from "../../components/ui/YoutubePlayer";
 
 const SocialAccountButton = ({
   url,
@@ -97,7 +96,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     { name: "Aman", invested: aman },
     { name: "Peyush", invested: peyush },
     { name: "Ghazal", invested: ghazal },
-  ];
+  ].filter(({ invested }) => !isNA(invested));
 
   const founders = [founder_1, founder_2, founder_3, founder_4].filter(
     founder => !isNA(founder)
@@ -192,24 +191,21 @@ const IndividualBrandPage = ({ investment, brand }) => {
             <HStack>
               <Text>Investment By:</Text>
               <HStack wrap={"wrap"} rowGap="2.5">
-                {sharks.map(({ invested, name }) => (
-                  <>
-                    {!isNA(invested) && (
-                      <Badge key={name} colorScheme="purple">
-                        {name}
-                      </Badge>
-                    )}
-                  </>
+                {sharks.map(({ name }) => (
+                  <Badge key={name + brand_id} colorScheme="purple">
+                    {name}
+                  </Badge>
                 ))}
               </HStack>
             </HStack>
           )}
         </VStack>
       </Stack>
-      <Box marginTop="10" order={{ lg: "2" }}>
+      <Box marginTop="10">
         <Stack
           justify={{ md: "space-between" }}
-          direction={{ base: "column", lg: "row" }}
+          direction={{ base: "column", md: "row" }}
+          spacing="5"
         >
           <Box>
             <Text as="h3" fontSize={{ base: "lg", md: "xl" }}>
@@ -251,28 +247,28 @@ const IndividualBrandPage = ({ investment, brand }) => {
                 />
               )}
             </HStack>
-            <Tag
-              mt={["2", "5"]}
-              mb={{ base: "4", lg: "0" }}
-              py="2.5"
-              px="5"
-              lineHeight="5"
-              color="gray.400"
-              colorScheme="teal"
-            >
-              Season {seasonNo}, Episode: {episodeNo} <br />
-              Titled: {episodeTitle}
-            </Tag>
           </Box>
-          <YoutubePlayer url={youtubeLink} />
+          <Tag
+            mt={["2", "5"]}
+            mb={{ base: "4", lg: "0" }}
+            py="2.5"
+            px="5"
+            lineHeight="6"
+            color="gray.400"
+            colorScheme="teal"
+          >
+            Pitch No. {brand_id} <br />
+            Season {seasonNo}, Episode: {episodeNo} <br />
+            Titled: {episodeTitle}
+          </Tag>
         </Stack>
       </Box>
       <Box marginTop="10">
         <H2 fontSize={["xl", "2xl"]}>About {brand_name}</H2>
         {about && (
           <VStack align="flex-end" mt={2}>
-            <Collapse startingHeight="20" in={isOpen}>
-              <Text noOfLines={isOpen ? "none" : 3} as="p" color="gray.300">
+            <Collapse startingHeight="100" in={isOpen}>
+              <Text noOfLines={isOpen ? "none" : 6} as="p" color="gray.300">
                 {about}
               </Text>
             </Collapse>

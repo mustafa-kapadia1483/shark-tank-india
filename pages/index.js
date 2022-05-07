@@ -127,6 +127,7 @@ export async function getStaticProps() {
 
   moneyGivenAsDebt *= 100000;
   moneyGivenForEquity *= 100000;
+  brands.reverse();
   return {
     props: {
       investments,
