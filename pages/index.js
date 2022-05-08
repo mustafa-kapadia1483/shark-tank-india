@@ -70,7 +70,7 @@ export default function Home({
         position="relative"
       >
         <Image
-          src="/home_banner.jpg"
+          src="https://etetamyl.sirv.com/icons/shark-tank-india-images/home_banner.jpg"
           width="640"
           height="360"
           alt="Banner Image"

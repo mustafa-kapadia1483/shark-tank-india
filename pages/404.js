@@ -20,7 +20,7 @@ export default function Custom404() {
         </Text>
       </Box>
       <Image
-        src="/404-banner.jpg"
+        src="https://etetamyl.sirv.com/icons/shark-tank-india-images/404-banner.jpg"
         width="400"
         height="379"
         alt="what are you trying to do"

@@ -202,7 +202,7 @@ const BrandsPage = () => {
                 No Results found, please try again
               </Text>
               <Image
-                src="/ashneer-time-barbaad.jpg"
+                src="https://etetamyl.sirv.com/icons/shark-tank-india-images/ashneer-time-barbaad.jpg"
                 width="533.77"
                 height="300"
               />
