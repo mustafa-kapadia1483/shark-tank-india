@@ -56,7 +56,7 @@ const BrandsPage = () => {
       setInvestments(JSON.parse(localStorage.getItem("investments")) || []);
       setBrands(JSON.parse(localStorage.getItem("brands")) || []);
     }
-  }, []);
+  }, [investments, setBrands, setInvestments]);
 
   useEffect(() => {
     setFiltered(investments);
@@ -83,7 +83,7 @@ const BrandsPage = () => {
 
       return temp;
     });
-  }, [deal, investments, sortVal, selectIndustry]);
+  }, [deal, brands, investments, sortVal, selectIndustry]);
 
   const industries = [];
   for (const brand of brands) {
@@ -205,6 +205,7 @@ const BrandsPage = () => {
                 src="https://etetamyl.sirv.com/icons/shark-tank-india-images/ashneer-time-barbaad.jpg"
                 width="533.77"
                 height="300"
+                alt="ashneer quote"
               />
             </VStack>
           )}
