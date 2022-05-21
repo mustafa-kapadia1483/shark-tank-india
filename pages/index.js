@@ -28,7 +28,7 @@ export default function Home({
     setBrands(brands);
     localStorage.setItem("investments", JSON.stringify(investments));
     localStorage.setItem("brands", JSON.stringify(brands));
-  }, []);
+  }, [investments, brands, setInvestments, setBrands]);
   return (
     <>
       <Head>
