@@ -62,45 +62,42 @@ export const options = {
     },
   },
 };
-const sharkLabels = {
-  ashneer: 0,
-  namita: 0,
-  anupam: 0,
-  vineeta: 0,
-  aman: 0,
-  peyush: 0,
-  ghazal: 0,
-};
 
-function getChartData(investments) {
-  for (const investment of investments) {
-    let count = 0;
-    let dealAmount = parseFloat(investment.deal_amount) || 0;
-    let dealDebt = parseFloat(investment.deal_debt) || 0;
-    for (const shark of Object.keys(sharkLabels)) {
-      if (!isNA(investment[shark])) {
-        count++;
+export function SharkbBarChart({ brands, investments }) {
+  const sharkLabels = {
+    ashneer: 0,
+    namita: 0,
+    anupam: 0,
+    vineeta: 0,
+    aman: 0,
+    peyush: 0,
+    ghazal: 0,
+  };
+  function getChartData(investments) {
+    for (const investment of investments) {
+      let count = 0;
+      let dealAmount = parseFloat(investment.deal_amount) || 0;
+      let dealDebt = parseFloat(investment.deal_debt) || 0;
+      for (const shark of Object.keys(sharkLabels)) {
+        if (!isNA(investment[shark])) {
+          count++;
+        }
       }
-    }
-    if (count > 1) {
-      dealAmount /= count;
-      dealDebt /= count;
-    }
-    for (const shark of Object.keys(sharkLabels)) {
-      if (!isNA(investment[shark])) {
-        sharkLabels[shark] += dealAmount + dealDebt;
+      if (count > 1) {
+        dealAmount /= count;
+        dealDebt /= count;
+      }
+      for (const shark of Object.keys(sharkLabels)) {
+        if (!isNA(investment[shark])) {
+          sharkLabels[shark] += dealAmount + dealDebt;
+        }
       }
     }
   }
-}
-
-export function SharkbBarChart({ brands, investments }) {
   const [labels, setLabels] = useState([]);
   const [sharkInvestmentData, setSharkInvestmentData] = useState([]);
   useEffect(() => {
     getChartData(investments);
-    setSharkInvestmentData([]);
-    setLabels([]);
 
     for (const [key, value] of Object.entries(sharkLabels).sort(
       ([, a], [, b]) => b - a
