@@ -11,14 +11,14 @@ const BrandList = ({ investments, brands }) => {
       alignItems="center"
       gap="10"
     >
-      {investments.map((investment, index) => (
-        <BrandCard
-          key={investment.brand_id}
-          investment={investment}
-          brand={brands[index]}
-          // dealDone={investment.deal_done}
-          // brand={brands[investment.brand_id - 1]}
-        />
+      {investments.map(investment => (
+        <>
+          <BrandCard
+            key={investment.brand_id}
+            investment={investment}
+            brand={brands[investment.brand_id - 1]}
+          />
+        </>
       ))}
     </Flex>
   );

@@ -92,7 +92,6 @@ function getChartData(investments) {
       }
     }
   }
-  console.log(sharkLabels);
 }
 
 export function SharkbBarChart({ brands, investments }) {
