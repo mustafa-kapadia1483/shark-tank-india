@@ -14,6 +14,9 @@ const H2 = ({
       textTransform="capitalize"
       fontWeight="extrabold"
       textAlign={textAlign}
+      style={{
+        wordSpacing: "0.25em",
+      }}
     >
       {children}
     </Heading>
