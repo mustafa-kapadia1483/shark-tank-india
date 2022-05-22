@@ -6,7 +6,7 @@ const AmountBadges = ({ amount, title }) => {
       <Text fontSize={["2xl", "4xl"]} color="yellow.300" mb="0">
         {amount}
       </Text>
-      <Text fontSize="sm" color="blue.400" mt="-2" opacity="0.6">
+      <Text fontSize="sm" color="blue.400" mt="-2" opacity="0.8">
         {title}
       </Text>
     </Flex>

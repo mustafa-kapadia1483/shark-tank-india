@@ -5,7 +5,9 @@ import H2 from "../components/ui/H2";
 const ApiDocumentationPage = () => {
   return (
     <>
-      <H1 textAlign="center">Shark Tank India API</H1>
+      <H1 textAlign="center" color="yellow.300">
+        Shark Tank India API
+      </H1>
       <Box mt="10">
         <H2 color="gray.400">Fetching Brands</H2>
         <VStack mt="5" spacing="5" align="flex-start">

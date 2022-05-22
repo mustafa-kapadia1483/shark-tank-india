@@ -12,13 +12,13 @@ const BrandList = ({ investments, brands }) => {
       gap="10"
     >
       {investments.map(investment => (
-        <BrandCard
-          key={investment.brand_id}
-          investment={investment}
-          brand={brands[investment.brand_id - 1]}
-          // dealDone={investment.deal_done}
-          // brand={brands[investment.brand_id - 1]}
-        />
+        <>
+          <BrandCard
+            key={investment.brand_id}
+            investment={investment}
+            brand={brands[investment.brand_id - 1]}
+          />
+        </>
       ))}
     </Flex>
   );

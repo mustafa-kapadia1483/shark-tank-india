@@ -13,6 +13,7 @@ import { Context } from "../state/Context";
 import H1 from "../components/ui/H1";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
+import { SharkbBarChart } from "../components/ui/SharkBarChart";
 
 export default function Home({
   investments,
@@ -55,11 +56,11 @@ export default function Home({
       >
         <AmountBadges
           amount={numFormatter(moneyGivenForEquity, true) + "+"}
-          title="Spent On Equity"
+          title="Invested in Equity"
         />
         <AmountBadges
           amount={numFormatter(moneyGivenAsDebt, true) + "+"}
-          title="Spent As Debt"
+          title="Invested As Debt"
         />
         <AmountBadges amount={totalPitches} title="Brands" />
       </Flex>
@@ -79,9 +80,23 @@ export default function Home({
       </Flex>
       <Box mt="24">
         <H2 color="yellow.300" textAlign="center">
+          Money Invested By Individual Sharks
+        </H2>
+        <Box
+          marginInline="auto"
+          height={["300px", "400px"]}
+          maxW={["100%", "50%"]}
+          mt="6"
+          overflow="auto"
+        >
+          <SharkbBarChart brands={brands} investments={investments} />
+        </Box>
+      </Box>
+      <Box mt="24">
+        <H2 color="yellow.300" textAlign="center">
           Pitches
         </H2>
-        <VStack marginTop="10" id="brands" spacing={10} marginBottom={10}>
+        <VStack marginTop="4" id="brands" spacing={10} marginBottom={10}>
           <BrandList
             investments={investments.slice(0, 6)}
             brands={brands.slice(0, 6)}
@@ -127,7 +142,6 @@ export async function getStaticProps() {
 
   moneyGivenAsDebt *= 100000;
   moneyGivenForEquity *= 100000;
-  brands.reverse();
   return {
     props: {
       investments,
