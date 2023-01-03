@@ -343,7 +343,7 @@ export async function getStaticProps(context) {
 
   const delay = time => new Promise(res => setTimeout(res, time));
 
-  await delay(30000);
+  await delay(60000);
 
   const sheets = await googleSheetsAuth();
   const row_id = parseInt(brand_id) + 1;
@@ -362,6 +362,6 @@ export async function getStaticProps(context) {
       brand,
     },
 
-    revalidate: 3600,
+    revalidate: 86400,
   };
 }
