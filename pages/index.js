@@ -150,5 +150,6 @@ export async function getStaticProps() {
       moneyGivenAsDebt,
       totalPitches,
     },
+    revalidate: 3600,
   };
 }
