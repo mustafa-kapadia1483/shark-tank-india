@@ -14,7 +14,7 @@ const BrandList = ({ investments, brands }) => {
       {investments.map(investment => (
         <>
           <BrandCard
-            key={investment.brand_id}
+            key={`${investment.brand_id}-card`}
             investment={investment}
             brand={brands[investment.brand_id - 1]}
           />

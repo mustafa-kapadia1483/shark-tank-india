@@ -28,6 +28,7 @@ import H2 from "../../components/ui/H2";
 import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
+import getJsonArrayFromData from "../../helpers/getJsonArrayFromData";
 
 const SocialAccountButton = ({
   url,
@@ -289,14 +290,61 @@ const IndividualBrandPage = ({ investment, brand }) => {
 
 export default IndividualBrandPage;
 
-export async function getServerSideProps({ query }) {
-  // Brand id from the url
-  const { brand_id } = query;
-  if (!parseInt(brand_id)) {
-    return {
-      notFound: true,
-    };
-  }
+// export async function getServerSideProps({ query }) {
+//   // Brand id from the url
+//   const { brand_id } = query;
+//   if (!parseInt(brand_id)) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+//   const sheets = await googleSheetsAuth();
+//   const row_id = parseInt(brand_id) + 1;
+//   const investmentRange = `investments!B${row_id}:P${row_id}`;
+//   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
+
+//   const brandRange = `brands!A${row_id}:U${row_id}`;
+//   const brandResponse = await queryGoogleSheet(sheets, brandRange);
+
+//   // Result
+//   const investment = investmentResponse.data.values[0];
+//   const brand = brandResponse.data.values[0];
+//   return {
+//     props: {
+//       investment,
+//       brand,
+//     },
+//   };
+// }
+
+export async function getStaticPaths() {
+  const sheets = await googleSheetsAuth();
+
+  const investmentsResponse = await queryGoogleSheet(
+    sheets,
+    "investments!A1:P"
+  );
+  const investmentsData = investmentsResponse.data.values;
+  const investments = getJsonArrayFromData(investmentsData);
+
+  const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:S");
+  const brandsData = brandsResponse.data.values;
+  const brands = getJsonArrayFromData(brandsData);
+
+  const paths = brands.map(brand => ({
+    params: { brand_id: brand.brand_id },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps(context) {
+  const brand_id = context.params.brand_id;
+
+  const delay = time => new Promise(res => setTimeout(res, time));
+
+  await delay(60000);
+
   const sheets = await googleSheetsAuth();
   const row_id = parseInt(brand_id) + 1;
   const investmentRange = `investments!B${row_id}:P${row_id}`;
@@ -313,5 +361,7 @@ export async function getServerSideProps({ query }) {
       investment,
       brand,
     },
+
+    revalidate: 86400,
   };
 }
