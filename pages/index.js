@@ -13,7 +13,7 @@ import { Context } from "../state/Context";
 import H1 from "../components/ui/H1";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
-import { SharkbBarChart } from "../components/ui/SharkBarChart";
+import { SharkBarChart } from "../components/ui/SharkBarChart";
 
 export default function Home({
   investments,
@@ -89,18 +89,15 @@ export default function Home({
           mt="6"
           overflow="auto"
         >
-          <SharkbBarChart brands={brands} investments={investments} />
+          <SharkBarChart brands={brands} investments={investments} />
         </Box>
       </Box>
       <Box mt="24">
         <H2 color="yellow.300" textAlign="center">
-          Pitches
+          Latest Pitches
         </H2>
         <VStack marginTop="4" id="brands" spacing={10} marginBottom={10}>
-          <BrandList
-            investments={investments.slice(0, 6)}
-            brands={brands.slice(0, 6)}
-          />
+          <BrandList investments={investments.slice(-6)} brands={brands} />
           <Link href="/brands" passHref>
             <Button bg="blue.900" size="lg" rightIcon={<BsArrowRight />}>
               View All Brands
