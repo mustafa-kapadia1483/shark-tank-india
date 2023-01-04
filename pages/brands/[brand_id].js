@@ -29,7 +29,6 @@ import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
 import getJsonArrayFromData from "../../helpers/getJsonArrayFromData";
-import { useRouter } from "next/router";
 
 const SocialAccountButton = ({
   url,
@@ -104,12 +103,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     founder => !isNA(founder)
   );
 
-  const router = useRouter();
   const { isOpen, onToggle } = useDisclosure();
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Box>
@@ -315,7 +309,7 @@ export async function getStaticPaths() {
     params: { brand_id: brand.brand_id },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps(context) {
