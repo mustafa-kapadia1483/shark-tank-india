@@ -7,6 +7,7 @@ import {
   VStack,
   Badge,
   Avatar,
+  GridItem,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import isNA from "../../helpers/isNA";
@@ -25,12 +26,9 @@ const BrandCard = ({
 }) => {
   return (
     <Link href={`/brands/${brand_id}`} passHref>
-      <Box
-        as="li"
-        maxW={"445px"}
+      <GridItem
+        as="a"
         p={10}
-        width={{ base: "100%", md: "340px", lg: "350px" }}
-        height={{ base: "auto", md: "440px", lg: "425px" }}
         bg={useColorModeValue("white", "gray.900")}
         borderWidth="thin"
         borderColor={"gray.700"}
@@ -74,7 +72,7 @@ const BrandCard = ({
             </Text>
           </Box>
         </Stack>
-      </Box>
+      </GridItem>
     </Link>
   );
 };

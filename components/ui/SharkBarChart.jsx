@@ -63,7 +63,7 @@ export const options = {
   },
 };
 
-export function SharkbBarChart({ brands, investments }) {
+export function SharkBarChart({ brands, investments }) {
   const sharkLabels = {
     ashneer: 0,
     namita: 0,

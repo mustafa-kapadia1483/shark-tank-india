@@ -29,6 +29,7 @@ import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
 import getJsonArrayFromData from "../../helpers/getJsonArrayFromData";
+import { useRouter } from "next/router";
 
 const SocialAccountButton = ({
   url,
@@ -103,7 +104,13 @@ const IndividualBrandPage = ({ investment, brand }) => {
     founder => !isNA(founder)
   );
 
+  const router = useRouter();
   const { isOpen, onToggle } = useDisclosure();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Box>
       <Head>
@@ -290,33 +297,6 @@ const IndividualBrandPage = ({ investment, brand }) => {
 
 export default IndividualBrandPage;
 
-// export async function getServerSideProps({ query }) {
-//   // Brand id from the url
-//   const { brand_id } = query;
-//   if (!parseInt(brand_id)) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-//   const sheets = await googleSheetsAuth();
-//   const row_id = parseInt(brand_id) + 1;
-//   const investmentRange = `investments!B${row_id}:P${row_id}`;
-//   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
-
-//   const brandRange = `brands!A${row_id}:U${row_id}`;
-//   const brandResponse = await queryGoogleSheet(sheets, brandRange);
-
-//   // Result
-//   const investment = investmentResponse.data.values[0];
-//   const brand = brandResponse.data.values[0];
-//   return {
-//     props: {
-//       investment,
-//       brand,
-//     },
-//   };
-// }
-
 export async function getStaticPaths() {
   const sheets = await googleSheetsAuth();
 
@@ -335,7 +315,7 @@ export async function getStaticPaths() {
     params: { brand_id: brand.brand_id },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps(context) {
@@ -361,7 +341,5 @@ export async function getStaticProps(context) {
       investment,
       brand,
     },
-
-    revalidate: 86400,
   };
 }
