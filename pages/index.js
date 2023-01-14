@@ -24,6 +24,7 @@ export default function Home({
 }) {
   const { setInvestments, setBrands } = useContext(Context);
   useEffect(() => {
+    investments.reverse();
     setInvestments(investments);
 
     setBrands(brands);
@@ -38,6 +39,18 @@ export default function Home({
           name="description"
           content="Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        ></link>
       </Head>
       <H1 textAlign="center">
         <Text display="inline-block" color="blue.400">
@@ -97,7 +110,7 @@ export default function Home({
           Latest Pitches
         </H2>
         <VStack marginTop="4" id="brands" spacing={10} marginBottom={10}>
-          <BrandList investments={investments.slice(-6)} brands={brands} />
+          <BrandList investments={investments.slice(0, 6)} brands={brands} />
           <Link href="/brands" passHref>
             <Button bg="blue.900" size="lg" rightIcon={<BsArrowRight />}>
               View All Brands

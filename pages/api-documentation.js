@@ -1,10 +1,26 @@
 import { Box, Code, Link, Text, VStack } from "@chakra-ui/react";
+import Head from "next/head";
 import H1 from "../components/ui/H1";
 import H2 from "../components/ui/H2";
 
 const ApiDocumentationPage = () => {
   return (
     <>
+      <Head>
+        <title>Api Documentation</title>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        ></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        ></link>
+      </Head>
       <H1 textAlign="center" color="yellow.300">
         Shark Tank India API
       </H1>
