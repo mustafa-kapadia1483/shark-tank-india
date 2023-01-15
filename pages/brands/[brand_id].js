@@ -328,7 +328,7 @@ export async function getStaticProps(context) {
   const delay = time => new Promise(res => setTimeout(res, time));
 
   if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
-    await delay(50000);
+    await delay(60000);
   }
 
   const sheets = await googleSheetsAuth();
