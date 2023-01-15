@@ -29,6 +29,7 @@ import googleSheetsAuth from "../../helpers/googleSheetsAuth";
 import isNA from "../../helpers/isNA";
 import queryGoogleSheet from "../../helpers/queryGoogleSheet";
 import getJsonArrayFromData from "../../helpers/getJsonArrayFromData";
+import { PHASE_PRODUCTION_BUILD } from "next/constants";
 
 const SocialAccountButton = ({
   url,
@@ -116,8 +117,17 @@ const IndividualBrandPage = ({ investment, brand }) => {
         {website && (
           <link
             rel="icon"
-            type="image/x-icon"
-            href={`https://s2.googleusercontent.com/s2/favicons?domain=${website}`}
+            type="image/png"
+            sizes="16x16"
+            href={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website}/&size=16`}
+          />
+        )}
+        {website && (
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website}/&size=32`}
           />
         )}
       </Head>
@@ -294,12 +304,12 @@ export default IndividualBrandPage;
 export async function getStaticPaths() {
   const sheets = await googleSheetsAuth();
 
-  const investmentsResponse = await queryGoogleSheet(
-    sheets,
-    "investments!A1:P"
-  );
-  const investmentsData = investmentsResponse.data.values;
-  const investments = getJsonArrayFromData(investmentsData);
+  // const investmentsResponse = await queryGoogleSheet(
+  //   sheets,
+  //   "investments!A1:P"
+  // );
+  // const investmentsData = investmentsResponse.data.values;
+  // const investments = getJsonArrayFromData(investmentsData);
 
   const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:S");
   const brandsData = brandsResponse.data.values;
@@ -317,7 +327,9 @@ export async function getStaticProps(context) {
 
   const delay = time => new Promise(res => setTimeout(res, time));
 
-  await delay(60000);
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    await delay(50000);
+  }
 
   const sheets = await googleSheetsAuth();
   const row_id = parseInt(brand_id) + 1;
