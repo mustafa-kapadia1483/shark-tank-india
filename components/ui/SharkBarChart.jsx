@@ -72,6 +72,7 @@ export function SharkBarChart({ brands, investments }) {
     aman: 0,
     peyush: 0,
     ghazal: 0,
+    amit: 0,
   };
   function getChartData(investments) {
     for (const investment of investments) {

@@ -66,6 +66,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     aman,
     peyush,
     ghazal,
+    amit,
   ] = investment;
   const [
     brand_id,
@@ -98,6 +99,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
     { name: "Aman", invested: aman },
     { name: "Peyush", invested: peyush },
     { name: "Ghazal", invested: ghazal },
+    { name: "Amit", invested: amit },
   ].filter(({ invested }) => !isNA(invested));
 
   const founders = [founder_1, founder_2, founder_3, founder_4].filter(
@@ -304,13 +306,6 @@ export default IndividualBrandPage;
 export async function getStaticPaths() {
   const sheets = await googleSheetsAuth();
 
-  // const investmentsResponse = await queryGoogleSheet(
-  //   sheets,
-  //   "investments!A1:P"
-  // );
-  // const investmentsData = investmentsResponse.data.values;
-  // const investments = getJsonArrayFromData(investmentsData);
-
   const brandsResponse = await queryGoogleSheet(sheets, "brands!A1:S");
   const brandsData = brandsResponse.data.values;
   const brands = getJsonArrayFromData(brandsData);
@@ -333,7 +328,7 @@ export async function getStaticProps(context) {
 
   const sheets = await googleSheetsAuth();
   const row_id = parseInt(brand_id) + 1;
-  const investmentRange = `investments!B${row_id}:P${row_id}`;
+  const investmentRange = `investments!B${row_id}:Q${row_id}`;
   const investmentResponse = await queryGoogleSheet(sheets, investmentRange);
 
   const brandRange = `brands!A${row_id}:U${row_id}`;
