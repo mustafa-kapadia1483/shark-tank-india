@@ -127,7 +127,7 @@ export async function getStaticProps() {
 
   const investmentsResponse = await queryGoogleSheet(
     sheets,
-    "investments!A1:P"
+    "investments!A1:Q"
   );
   const investmentsData = investmentsResponse.data.values;
   const investments = getJsonArrayFromData(investmentsData);

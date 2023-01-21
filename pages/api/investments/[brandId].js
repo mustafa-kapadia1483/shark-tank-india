@@ -17,7 +17,7 @@ const handler = async (req, res) => {
   const brandRow = parseInt(brandId) + 1;
   const response = await queryGoogleSheet(
     sheets,
-    `${sheetName}!A${brandRow}:P${brandRow}`
+    `${sheetName}!A${brandRow}:Q${brandRow}`
   );
   const data = response.data.values;
   const jsonData = getJsonArrayFromData(columnNames.concat(data));
