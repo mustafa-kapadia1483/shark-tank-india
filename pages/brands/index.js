@@ -30,6 +30,10 @@ const BrandsPage = () => {
   const [selectIndustry, setSelectIndustry] = useState(false);
   const [show, setShow] = useState(false);
 
+  const pageTitle = "Brands on Shark Tank India";
+  const pageDescription =
+    "Shark Tank India Stats Brands Page, view brands that came on shark tank, the deals the got through various filters.";
+
   const search = e => {
     const text = e.target.value;
     let filteredName = filtered.filter(i => {
@@ -43,13 +47,6 @@ const BrandsPage = () => {
       setFiltered(filteredName);
     }
   };
-
-  // const fetcher =  (url) => fetch(url).then((res) => res.json());
-
-  // const { data: brand, error: e1 } = useSWR("/api/brands", fetcher);
-  // setBrands(brand);
-  // const { data: invest, error: e2 } = useSWR("/api/investments", fetcher);
-  // setInvestments(invest);
 
   useEffect(() => {
     if (investments.length === 0) {
@@ -110,7 +107,17 @@ const BrandsPage = () => {
   return (
     <>
       <Head>
-        <title>Brands on Shark Tank India</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+
+        <meta property="og:url" content={`${process.env.SITE_URL}/brands`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+
+        <meta name="twitter:url" content={`${process.env.SITE_URL}/brands`} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+
         <link
           rel="icon"
           type="image/png"

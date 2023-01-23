@@ -23,6 +23,11 @@ export default function Home({
   totalPitches,
 }) {
   const { setInvestments, setBrands } = useContext(Context);
+
+  const pageDescription =
+    "Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place";
+  const pageTitle = "Shark Tank India Stats";
+
   useEffect(() => {
     investments.reverse();
     setInvestments(investments);
@@ -34,11 +39,17 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Shark Tank India Stats</title>
-        <meta
-          name="description"
-          content="Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place"
-        />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+
+        <meta property="og:url" content={process.env.SITE_URL} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+
+        <meta name="twitter:url" content={process.env.SITE_URL} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+
         <link
           rel="icon"
           type="image/png"

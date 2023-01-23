@@ -4,10 +4,29 @@ import H1 from "../components/ui/H1";
 import H2 from "../components/ui/H2";
 
 const ApiDocumentationPage = () => {
+  const pageTitle = "API Documentation";
+  const pageDescription =
+    "Get all shark tank india brands data through our API";
   return (
     <>
       <Head>
-        <title>Api Documentation</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+
+        <meta
+          property="og:url"
+          content={`${process.env.SITE_URL}/api-documentation`}
+        />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+
+        <meta
+          name="twitter:url"
+          content={`${process.env.SITE_URL}/api-documentation`}
+        />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+
         <link
           rel="icon"
           type="image/png"
