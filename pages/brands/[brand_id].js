@@ -116,6 +116,27 @@ const IndividualBrandPage = ({ investment, brand }) => {
           name="description"
           content={about ? about.substring(0, 160) : idea}
         />
+
+        <meta
+          property="og:url"
+          content={`${process.env.SITE_URL}/brands/${brand_id}`}
+        />
+        <meta property="og:title" content={brand_name} />
+        <meta
+          property="og:description"
+          content={about ? about.substring(0, 160) : idea}
+        />
+
+        <meta
+          name="twitter:url"
+          content={`${process.env.SITE_URL}/brands${brand_id}`}
+        />
+        <meta name="twitter:title" content={brand_name} />
+        <meta
+          name="twitter:description"
+          content={about ? about.substring(0, 160) : idea}
+        />
+
         {website && (
           <link
             rel="icon"
@@ -131,6 +152,13 @@ const IndividualBrandPage = ({ investment, brand }) => {
             sizes="32x32"
             href={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website}/&size=32`}
           />
+        )}
+        {website && (
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${website}/&size=32`}
+          ></link>
         )}
       </Head>
       <Stack
