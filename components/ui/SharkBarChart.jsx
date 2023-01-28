@@ -95,21 +95,17 @@ export function SharkBarChart({ brands, investments }) {
       }
     }
   }
-  const [labels, setLabels] = useState([]);
-  const [sharkInvestmentData, setSharkInvestmentData] = useState([]);
-  useEffect(() => {
-    getChartData(investments);
 
-    for (const [key, value] of Object.entries(sharkLabels).sort(
-      ([, a], [, b]) => b - a
-    )) {
-      setLabels(prevArray => [
-        ...prevArray,
-        key[0].toUpperCase() + key.substring(1, key.length),
-      ]);
-      setSharkInvestmentData(prevArray => [...prevArray, value / 100]);
-    }
-  }, [brands, investments]);
+  const labels = [];
+  const sharkInvestmentData = [];
+  getChartData(investments);
+
+  for (const [key, value] of Object.entries(sharkLabels).sort(
+    ([, a], [, b]) => b - a
+  )) {
+    labels.push(key[0].toUpperCase() + key.substring(1, key.length));
+    sharkInvestmentData.push(value / 100);
+  }
 
   const data = {
     labels,
