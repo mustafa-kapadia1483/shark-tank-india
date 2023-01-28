@@ -32,7 +32,15 @@ export default function Home({
     investments.reverse();
     setInvestments(investments);
 
-    setBrands(brands);
+  const pageDescription =
+    "Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place";
+  const pageTitle = "Shark Tank India Stats";
+
+  investments.reverse();
+  setInvestments(investments);
+  setBrands(brands);
+
+  useEffect(() => {
     localStorage.setItem("investments", JSON.stringify(investments));
     localStorage.setItem("brands", JSON.stringify(brands));
   }, [investments, brands, setInvestments, setBrands]);
