@@ -28,14 +28,6 @@ export default function Home({
     "Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place";
   const pageTitle = "Shark Tank India Stats";
 
-  useEffect(() => {
-    investments.reverse();
-    setInvestments(investments);
-
-  const pageDescription =
-    "Shark Tank India Stats Page, view brands that came on shark tank, the deals the got. Everything about shark tank india in one place";
-  const pageTitle = "Shark Tank India Stats";
-
   investments.reverse();
   setInvestments(investments);
   setBrands(brands);
