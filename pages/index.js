@@ -35,7 +35,7 @@ export default function Home({
   useEffect(() => {
     localStorage.setItem("investments", JSON.stringify(investments));
     localStorage.setItem("brands", JSON.stringify(brands));
-  }, [investments, brands, setInvestments, setBrands]);
+  }, [investments, brands]);
   return (
     <>
       <Head>
