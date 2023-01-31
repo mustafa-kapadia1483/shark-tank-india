@@ -214,7 +214,7 @@ const IndividualBrandPage = ({ investment, brand }) => {
               equityAmount={ask_amount}
               equity={ask_equity}
               sharksInDeal={1}
-              successMsg="Original Ask: "
+              successMsg="Ask: "
               successColor="gray.400"
               dealValuation={ask_valuation}
               breakLine={false}
@@ -310,7 +310,12 @@ const IndividualBrandPage = ({ investment, brand }) => {
         {about && (
           <VStack align="flex-end" mt={2}>
             <Collapse startingHeight="100" in={isOpen}>
-              <Text noOfLines={isOpen ? "none" : 6} as="p" color="gray.300">
+              <Text
+                noOfLines={isOpen ? "none" : 6}
+                as="p"
+                color="gray.300"
+                sx={{ whiteSpace: "pre-line" }}
+              >
                 {about}
               </Text>
             </Collapse>

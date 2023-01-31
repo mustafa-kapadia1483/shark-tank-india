@@ -20,7 +20,7 @@ ChartJS.register(
 );
 defaults.font.family = "Poppins";
 
-export const options = {
+const options = {
   maintainAspectRatio: false,
   indexAxis: "y",
   elements: {
@@ -39,8 +39,8 @@ export const options = {
   },
   plugins: {
     datalabels: {
-      clamp: "true",
-      clip: "true",
+      clamp: "false",
+      clip: "false",
       color: "#EDF2F7",
       formatter: function (value, context) {
         let label = context.dataIndex.label || "";
