@@ -109,7 +109,7 @@ export default function Home({
         <Box
           marginInline="auto"
           height={["300px", "400px"]}
-          maxW={["100%", "50%"]}
+          maxW={["100%", "70%"]}
           mt="6"
           overflow="auto"
         >

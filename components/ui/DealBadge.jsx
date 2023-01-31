@@ -15,7 +15,7 @@ const DealBadge = ({
   equity,
   debtAmount,
   sharksInDeal,
-  successMsg = "Deal Got: ",
+  successMsg = "Deal: ",
   successColor = "green.500",
   dealValuation,
   breakLine = true,
